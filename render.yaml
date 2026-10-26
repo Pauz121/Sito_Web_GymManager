@@ -1,0 +1,30 @@
+# Preparation only. Creating/syncing a Render service requires explicit approval.
+services:
+  - type: web
+    runtime: static
+    name: gymmanager-website
+    repo: https://github.com/Pauz121/Sito_Web_GymManager
+    branch: main
+    autoDeployTrigger: off
+    buildCommand: node scripts/validate-site.mjs && node scripts/prepare-public.mjs
+    staticPublishPath: ./dist
+    envVars:
+      - key: SKIP_INSTALL_DEPS
+        value: "true"
+    routes:
+      - type: redirect
+        source: /privacy
+        destination: /privacy/
+      - type: redirect
+        source: /support
+        destination: /support/
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: X-Frame-Options
+        value: DENY

@@ -1,0 +1,63 @@
+{
+  "source": "assets/source/Video app IOS_Trainer.mp4",
+  "sourceSha256": "cf2f1f8d8b53e8209c60ca8ad39c97bfebf16331b8f4943b7d2395dcebb7d81e",
+  "originalBytes": 9643583,
+  "duration": 88.766735,
+  "codec": "h264",
+  "width": 384,
+  "height": 832,
+  "nominalFps": "60/1",
+  "averageFps": "101275/2219",
+  "candidates": [
+    {
+      "file": "candidate-00.webp",
+      "timestamp": 3
+    },
+    {
+      "file": "candidate-01.webp",
+      "timestamp": 13
+    },
+    {
+      "file": "candidate-02.webp",
+      "timestamp": 23
+    },
+    {
+      "file": "candidate-03.webp",
+      "timestamp": 33
+    },
+    {
+      "file": "candidate-04.webp",
+      "timestamp": 43
+    },
+    {
+      "file": "candidate-05.webp",
+      "timestamp": 53
+    },
+    {
+      "file": "candidate-06.webp",
+      "timestamp": 63
+    },
+    {
+      "file": "candidate-07.webp",
+      "timestamp": 73
+    },
+    {
+      "file": "candidate-08.webp",
+      "timestamp": 83
+    }
+  ],
+  "selectedPosterTimestamp": 23,
+  "poster": "assets/screenshots/ios-trainer-poster.webp",
+  "webVideo": "assets/videos/ios-trainer-overview-web.mp4",
+  "optimizedBytes": 4791248,
+  "webDuration": 88.766016,
+  "webStream": [
+    {
+      "codec": "h264",
+      "kind": "video",
+      "width": 384,
+      "height": 832,
+      "fps": "30/1"
+    }
+  ]
+}

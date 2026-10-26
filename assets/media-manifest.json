@@ -1,0 +1,85 @@
+{
+  "images": [
+    {
+      "source": "img/Cliente.jfif",
+      "file": "02-client-upload.webp",
+      "second": null
+    },
+    {
+      "source": "img/Questionario.jfif",
+      "file": "03-questionnaire.webp",
+      "second": null
+    },
+    {
+      "source": "img/calendario.jfif",
+      "file": "09-calendar.webp",
+      "second": null
+    },
+    {
+      "source": "img/Pagamenti.jfif",
+      "file": "11-payments.webp",
+      "second": null
+    },
+    {
+      "source": "img/Prima registrazione.mp4",
+      "file": "12-client-demo.webp",
+      "second": 7
+    },
+    {
+      "source": "img/Prima registrazione.mp4",
+      "file": "10-progress.webp",
+      "second": 18
+    },
+    {
+      "source": "img/Seconda registrazione.mp4",
+      "file": "04-workout-plan.webp",
+      "second": 12
+    },
+    {
+      "source": "img/Seconda registrazione.mp4",
+      "file": "05-body-focus.webp",
+      "second": 22.6
+    },
+    {
+      "source": "img/Seconda registrazione.mp4",
+      "file": "07-nutrition-overview.webp",
+      "second": 34
+    },
+    {
+      "source": "img/Seconda registrazione.mp4",
+      "file": "08-nutrition-client-plan.webp",
+      "second": 37
+    }
+  ],
+  "clips": [
+    {
+      "name": "workout-analysis",
+      "source": "img/Seconda registrazione.mp4",
+      "start": 18,
+      "duration": 9,
+      "poster": "05-body-focus.webp",
+      "title": "Scheda, Body Focus e analisi dei volumi",
+      "description": "Il Trainer scorre le sessioni di una scheda demo e consulta Body Focus, radar e linee di lavoro."
+    },
+    {
+      "name": "client-progress",
+      "source": "img/Prima registrazione.mp4",
+      "start": 14,
+      "duration": 19,
+      "poster": "10-progress.webp",
+      "title": "Progressi e composizione corporea",
+      "description": "Rilevazioni, grafici e dettaglio plicometrico del profilo sintetico Giulio Bianchi DEMO."
+    },
+    {
+      "name": "nutrition-plan",
+      "source": "img/Seconda registrazione.mp4",
+      "start": 34,
+      "duration": 4,
+      "poster": "07-nutrition-overview.webp",
+      "title": "Piano nutrizionale del Cliente",
+      "description": "Dal riepilogo del piano demo alle giornate, con pasti, quantità, calorie e macronutrienti."
+    }
+  ],
+  "audio": "REMOVED",
+  "note": "Dati sintetici/demo. Registrazioni originali escluse dal pacchetto pubblico."
+}
