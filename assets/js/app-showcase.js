@@ -8,11 +8,11 @@
     tops.forEach(function (top, index) { if (top <= line) selected = index; });
     return selected;
   }
-  global.GymManagerShowcase = Object.freeze({ indexAtLine: indexAtLine });
+  function normalized(value) { return Math.max(0, Math.min(1, value)); }
+  global.GymManagerShowcase = Object.freeze({ indexAtLine: indexAtLine, normalized: normalized });
   if (typeof document === 'undefined') return;
 
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  var shortViewport = window.matchMedia('(max-height: 600px)');
   var components = [];
   document.querySelectorAll('[data-app-showcase]').forEach(function (section) {
     var steps = Array.from(section.querySelectorAll('[data-showcase-step]'));
@@ -24,6 +24,9 @@
     var cta = section.querySelector('[data-showcase-cta]');
     var zoomNote = section.querySelector('.desktop-showcase__zoom-note');
     var desktop = section.dataset.showcaseVariant === 'desktop';
+    var stageElement = section.querySelector('.app-showcase__stage');
+    var layout = section.querySelector('.app-showcase__layout');
+    var activeCopy = section.querySelector('[data-showcase-active-copy]');
     // DOM is the data contract: each instance owns its title/copy/features/screens.
     var items = steps.map(function (step) {
       var key = step.dataset.showcaseStep;
@@ -37,6 +40,7 @@
     if (!items.length || items.some(function (item) { return !item.screen || !item.link; })) return;
     var active = -1;
     var failed = false;
+    var compact = false, enabled = false, origin = 0, run = 1, readingLine = 0, tops = [];
     function activate(index) {
       if (active === index) return;
       active = index;
@@ -50,6 +54,10 @@
         else item.link.removeAttribute('aria-current');
       });
       var item = items[index];
+      if (compact && activeCopy) {
+        var originalCopy = item.step.querySelector('.app-showcase__step-copy');
+        if (originalCopy) activeCopy.replaceChildren(originalCopy.cloneNode(true));
+      }
       var pending = item.screen.dataset.showcasePending === 'true';
       if (caption) caption.textContent = item.label + (pending ? ' · anteprima in preparazione' : ' · schermata reale');
       if (desktop) {
@@ -65,24 +73,61 @@
     }
     function error() {
       failed = true;
-      section.classList.remove('is-enhanced');
       section.classList.add('has-media-error');
       var note = section.querySelector('.app-showcase__media-error');
       if (note) note.hidden = false;
+      configure();
     }
     items.forEach(function (item, index) {
       item.screen.addEventListener('error', error);
       if (item.screen.complete && !item.screen.naturalWidth) error();
       item.link.addEventListener('click', function () { activate(index); });
     });
+    function fallback(reason) {
+      enabled = false;
+      section.dataset.showcaseMode = reason;
+      section.classList.remove('is-enhanced', 'is-compact-story');
+      items.forEach(function (item) { item.step.inert = false; item.step.removeAttribute('aria-hidden'); });
+      if (activeCopy) activeCopy.hidden = true;
+      section.style?.removeProperty('--showcase-height');
+    }
+    function configure() {
+      compact = !desktop && (window.innerWidth < 1024 || window.innerHeight < 650);
+      if (failed || reducedMotion.matches || (desktop && window.innerWidth <= 1024)) return fallback(failed ? 'media-error' : reducedMotion.matches ? 'reduced-motion' : 'legacy-desktop');
+      enabled = true;
+      section.classList.add('is-enhanced');
+      section.classList.toggle('is-compact-story', compact);
+      section.dataset.showcaseMode = compact ? (window.innerHeight < 520 && window.innerWidth > window.innerHeight ? 'landscape' : window.innerWidth < 768 ? 'mobile' : 'tablet') : 'desktop';
+      if (activeCopy) activeCopy.hidden = !compact;
+      items.forEach(function (item) { item.step.inert = compact; if (compact) item.step.setAttribute('aria-hidden','true'); else item.step.removeAttribute('aria-hidden'); });
+      if (compact && activeCopy && layout) {
+        active = -1; activate(0);
+        activeCopy.style.minHeight = '0px';
+        section.style.setProperty('--showcase-copy-width', activeCopy.getBoundingClientRect().width + 'px');
+        // Original text is the source of truth. Measure its maximum only at layout changes.
+        var copyHeight = Math.max.apply(null, items.map(function (item) { return item.step.querySelector('.app-showcase__step-copy').getBoundingClientRect().height; }));
+        activeCopy.style.minHeight = copyHeight + 'px';
+        var stageHeight = stageElement.getBoundingClientRect().height;
+        var inset = window.innerWidth <= 768 ? 82 : 94;
+        if (stageHeight > window.innerHeight - inset) return fallback('content-overflow');
+        run = (items.length - 1) * Math.max(260, stageHeight * .85);
+        section.style.setProperty('--showcase-step-run', run / Math.max(1, items.length - 1) + 'px');
+        section.style.setProperty('--showcase-height', run + stageHeight + 'px');
+        section.dataset.showcaseMeasuredHeight = String(Math.round(stageHeight));
+        origin = layout.getBoundingClientRect().top + window.scrollY - inset;
+      } else {
+        tops = items.map(function (item) { return item.step.getBoundingClientRect().top + (window.scrollY || 0); });
+        readingLine = window.innerHeight * .5;
+      }
+      update();
+    }
     function update() {
-      var enhanced = !failed && !reducedMotion.matches && !shortViewport.matches && (!desktop || window.innerWidth > 1024);
-      section.classList.toggle('is-enhanced', enhanced);
-      if (!enhanced) return;
-      var mobile = window.innerWidth <= 768;
-      var stage = section.querySelector('.app-showcase__stage').getBoundingClientRect();
-      var readingLine = mobile ? Math.min(window.innerHeight - 80, stage.bottom + 80) : window.innerHeight * .5;
-      activate(indexAtLine(items.map(function (item) { return item.step.getBoundingClientRect().top; }), readingLine));
+      if (!enabled || document.hidden) return;
+      var y = window.scrollY || 0;
+      var p = compact ? normalized((y - origin) / run) : normalized((y + readingLine - tops[0]) / Math.max(1, tops[tops.length - 1] - tops[0]));
+      section.style?.setProperty('--showcase-progress', String(p));
+      section.dataset.showcaseProgress = String(p);
+      activate(compact ? Math.round(p * (items.length - 1)) : indexAtLine(tops.map(function (top) { return top - y; }), readingLine));
     }
     activate(0);
     var phone = section.querySelector('[data-showcase-phone]');
@@ -90,7 +135,7 @@
       if (items[active].screen.dataset.showcasePending === 'true') return;
       document.dispatchEvent(new CustomEvent('gymmanager:image-open', { detail: { image: items[active].screen, trigger: phone } }));
     });
-    components.push(update);
+    components.push({ configure: configure, update: update });
   });
 
   var nav = document.querySelector('.nav-links');
@@ -113,20 +158,24 @@
     }
   }
   var scheduled = false;
-  function schedule() {
+  var needsLayout = true;
+  function schedule(remeasure) {
+    if (remeasure === true) needsLayout = true;
     if (scheduled) return;
     scheduled = true;
     window.requestAnimationFrame(function () {
       scheduled = false;
-      components.forEach(function (update) { update(); });
+      if (needsLayout) { needsLayout = false; components.forEach(function (component) { component.configure(); }); }
+      components.forEach(function (component) { component.update(); });
       updateNav();
     });
   }
   window.addEventListener('scroll', schedule, { passive: true });
-  window.addEventListener('resize', schedule);
+  window.addEventListener('resize', function () { schedule(true); });
   window.addEventListener('hashchange', schedule);
-  window.addEventListener('pageshow', schedule);
-  reducedMotion.addEventListener('change', schedule);
-  shortViewport.addEventListener('change', schedule);
+  window.addEventListener('pageshow', function () { schedule(true); });
+  document.addEventListener?.('gymmanager:story-layout', function () { schedule(true); });
+  document.addEventListener?.('visibilitychange', schedule);
+  reducedMotion.addEventListener('change', function () { schedule(true); });
   schedule();
 }(globalThis));

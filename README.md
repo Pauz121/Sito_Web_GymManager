@@ -14,6 +14,14 @@ Privacy/Supporto non hanno badge, titoli o metadata di bozza. Contatti approvati
 
 Test correnti: aggiungere `scripts/publication.test.mjs` al comando Node sotto. Originali/video utente, `.qa`, catture, `dist` e handoff restano esclusi dal commit. Il video utente locale modificato non viene pubblicato né sovrascritto. Le sezioni successive documentano anche le fasi storiche: in caso di conflitto prevale questa disposizione corrente.
 
+## Mobile parity — aggiornamento locale del 29 ottobre 2026
+
+Desktop, Trainer ed Ecosistema mantengono ora le storie controllate dallo scroll verticale anche su telefono e tablet. Hero, contenuti, percorsi e immagini originali restano quelli approvati. Sui layout compatti le slide Desktop/Ecosistema si assestano sulla schermata corrente con una breve transizione orizzontale; sul Desktop resta il movimento continuo. I controlli numerati sono facoltativi. Nessun listener wheel/touch, scroll lock di pagina o libreria aggiunta.
+
+Modalità: mobile sotto768px, tablet768–1023px, Desktop da1024px; altezza sotto520px in landscape usa una composizione corta. Il Trainer usa la composizione compatta anche sotto650px di altezza. Il breakpoint della navbar resta768px. Le altezze dei media usano `svh`; il controller misura lo spazio effettivo e ricalcola dopo resize/contenuti caricati. Reduced motion, assenza JS, errore media e contenuto realmente più alto dello spazio disponibile mantengono la sequenza leggibile completa. La sola larghezza non disattiva più le storie.
+
+Su telefono le schermate Desktop mostrano una regione dell'immagine reale; “Ingrandisci” apre l'originale completo con scorrimento nativo nel dialog e chiusura accessibile. Il menu gestisce Escape, ritorno del focus e navigazione Back. App Client resta esclusa. Stato, matrice11viewport, limiti dei test e file modificati: [MOBILE_EXPERIENCE_PARITY_REPORT.md](MOBILE_EXPERIENCE_PARITY_REPORT.md). Dopo il checkpoint locale l'utente ha autorizzato la pubblicazione tramite il flusso GitHub/Cloudflare esistente.
+
 HTML/CSS/JavaScript vanilla, generazione statica Node senza dipendenze npm. Un progetto, una build, una dist e un solo deployment/domain. Nessun ecommerce, prezzo o tracking; nessuna modifica alle applicazioni.
 
 ## Build e unica anteprima
@@ -50,7 +58,7 @@ Desktop: sei schermate vere (Dashboard, Clienti, Schede, Alimentazione, Progress
 
 Ecosistema: Desktop prepara/assegna, Trainer consulta in mobilità, Client collegato accede ai propri contenuti pubblicati; stato finale a ruoli connessi. Il token “Scheda assegnata” è una rappresentazione del programma, non un protocollo di inoltro fra telefoni né promessa di sincronizzazione immediata.
 
-Controller home-story.js condiviso per le due storie, un rAF per burst di scroll, no librerie/timer. Mobile <960px, viewport<700px, movimento ridotto, media failure o spazio insufficiente: contenuto verticale completo. No-JS: default verticale. Inactive slides inert soltanto nell’enhancement; controlli con area44px, testo/immagini non dipendono dal solo colore.
+Controller home-story.js condiviso per le due storie, un rAF per burst di scroll, no librerie/timer. Il precedente fallback sotto960px/700px è stato sostituito dalle modalità responsive documentate sopra. Movimento ridotto, media failure o spazio effettivamente insufficiente: contenuto verticale completo. No-JS: default verticale. Inactive slides inert soltanto nell’enhancement; controlli con area44px, testo/immagini non dipendono dal solo colore.
 
 ## Sorgenti
 
@@ -61,7 +69,7 @@ Controller home-story.js condiviso per le due storie, un rAF per burst di scroll
 - content/desktop-features.mjs + scripts/desktop-render.mjs: otto aree e contenuto ricco /desktop.
 - funzionalita.html, download.html, privacy/index.html, support/index.html: input/storico riutilizzati; il vecchio chrome sorgente non è quello pubblico.
 - assets/css/styles.css e desktop.css: identità esistente; home-story.css solo Home.
-- assets/js/app-showcase.js: Trainer invariato; home-story.js: Desktop/ecosistema; site.js: menu, zoom/dialog/focus/reveal; download.js: latest stable.
+- assets/js/app-showcase.js: Trainer con la medesima sequenza/copy e modalità compatta; home-story.js: Desktop/ecosistema; site.js: menu, zoom/dialog/focus/reveal; download.js: latest stable.
 
 Nuove route: aggiungere un record nel registro e un renderer di corpo, mai un nuovo server. Non modificare dist a mano. Il build allowlist rifiuta file inattesi: ispezionare e archiviare recuperabilmente, non cancellare indiscriminatamente.
 

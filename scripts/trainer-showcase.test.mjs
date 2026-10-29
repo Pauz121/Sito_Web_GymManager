@@ -104,9 +104,10 @@ test('no-JS and reduced-motion fallback exposes every screenshot with its own te
   assert.doesNotMatch(section, /class="app-showcase__step[^"]* reveal/);
   const css = await read('assets/css/styles.css');
   assert.match(css, /\.app-showcase__stage \{ display: none/);
-  assert.match(css, /prefers-reduced-motion: reduce\), \(max-height: 600px\)/);
+  assert.doesNotMatch(css, /prefers-reduced-motion: reduce\), \(max-height: 600px\)/);
   assert.match(css, /\.is-enhanced \.app-showcase__inline \{ display: block/);
-  assert.match(source, /!failed && !reducedMotion.matches && !shortViewport.matches/);
+  assert.match(source, /failed \|\| reducedMotion.matches/);
+  assert.doesNotMatch(source, /shortViewport/);
   assert.doesNotMatch(source, /preventDefault|setInterval|scrollTo|scrollIntoView/);
 });
 
@@ -117,8 +118,9 @@ test('source interaction/accessibility contract: scoped instances, focusable lin
   assert.match(source, /setAttribute\('aria-current', 'step'\)/);
   assert.match(source, /setAttribute\('aria-current', 'location'\)/);
   assert.match(source, /setAttribute\('aria-hidden'/);
-  assert.match(source, /classList.remove\('is-enhanced'\)/);
+  assert.match(source, /classList.remove\('is-enhanced', 'is-compact-story'\)/);
   assert.doesNotMatch(source, /\.focus\(|innerHTML|fetch\(/);
+  assert.match(source, /originalCopy.cloneNode/);
   const css = await read('assets/css/styles.css');
   assert.match(css, /\.app-showcase__nav a \{ min-height: 44px/);
   assert.match(css, /object-fit: contain/);
@@ -142,33 +144,35 @@ test('Desktop overview replaces videos with real static images without autoplay'
 
 // Exercise the real controller in an isolated DOM test double, not a second
 // implementation. Native layout/interaction remains a separate browser check.
-function mount({ reduced = false, short = false, topSets = [[0, 800, 1600, 2400, 3200]] } = {}) {
+function mount({ reduced = false, short = false, width = 1440, height = 900, stageHeight = 340, topSets = [[0, 800, 1600, 2400, 3200]] } = {}) {
   function node() {
     const attrs = {}, classes = new Set(), handlers = {};
     return {
       attrs, classes, handlers, dataset: {}, complete: true, naturalWidth: 400,
+      style: {values:{},setProperty(k,v){this.values[k]=v;},removeProperty(k){delete this.values[k];}},
       setAttribute(k, v) { attrs[k] = v; }, removeAttribute(k) { delete attrs[k]; },
       addEventListener(k, fn) { handlers[k] = fn; },
-      classList: { add(k) { classes.add(k); }, remove(k) { classes.delete(k); }, toggle(k, on) { if (on) classes.add(k); else classes.delete(k); } }
+      classList: { add(k) { classes.add(k); }, remove(...values) { values.forEach(k=>classes.delete(k)); }, toggle(k, on) { if (on) classes.add(k); else classes.delete(k); } }
     };
   }
   const sections = topSets.map(tops => {
     const section = node(), phone = node(), caption = node(), note = node();
-    const steps = keys.map((key, i) => ({ ...node(), dataset: { showcaseStep: key, showcaseLabel: key }, getBoundingClientRect: () => ({ top: tops[i] }) }));
+    const copy=node(); copy.getBoundingClientRect=()=>({width:160,height:240}); copy.replaceChildren=value=>{copy.rendered=value;};
+    const steps = keys.map((key, i) => ({ ...node(), dataset: { showcaseStep: key, showcaseLabel: key }, querySelector:()=>({getBoundingClientRect:()=>({height:240}),cloneNode:()=>({key})}), getBoundingClientRect: () => ({ top: tops[i] }) }));
     const screens = keys.map(key => ({ ...node(), dataset: { showcaseScreen: key } }));
     const links = keys.map(key => ({ ...node(), dataset: { showcaseLink: key } }));
     section.querySelectorAll = selector => selector === '[data-showcase-step]' ? steps : selector === '[data-showcase-screen]' ? screens : links;
-    section.querySelector = selector => selector === '[data-showcase-caption]' ? caption : selector === '[data-showcase-phone]' ? phone : selector === '.app-showcase__media-error' ? note : { getBoundingClientRect: () => ({ bottom: 400 }) };
-    return Object.assign(section, { screens, steps, links, note, caption, phone });
+    section.querySelector = selector => selector === '[data-showcase-caption]' ? caption : selector === '[data-showcase-phone]' ? phone : selector === '.app-showcase__media-error' ? note : selector==='[data-showcase-active-copy]' ? copy : selector==='.app-showcase__layout' ? {getBoundingClientRect:()=>({top:2000})} : { getBoundingClientRect: () => ({ bottom: 400,height:stageHeight }) };
+    return Object.assign(section, { screens, steps, links, note, caption, phone, copy });
   });
   const events = {}, media = { reduced: { matches: reduced, addEventListener() {} }, short: { matches: short, addEventListener() {} } };
   const sandbox = vm.createContext({
     document: { querySelectorAll: () => sections, querySelector: () => null, dispatchEvent() {} },
-    window: { innerWidth: 1440, innerHeight: 900, matchMedia: query => query.includes('reduce') ? media.reduced : media.short, addEventListener: (k, fn) => { events[k] = fn; }, requestAnimationFrame: fn => fn() },
+    window: { innerWidth: width, innerHeight: height, scrollY: 0, matchMedia: query => query.includes('reduce') ? media.reduced : media.short, addEventListener: (k, fn) => { events[k] = fn; }, requestAnimationFrame: fn => fn() },
     CustomEvent: function (type, options) { this.type = type; this.detail = options.detail; }
   });
   vm.runInContext(source, sandbox);
-  return { sections, media, events };
+  return { sections, media, events, scroll(y) { sandbox.window.scrollY = y; events.scroll(); } };
 }
 
 test('controller selects exactly one image/link; direct selections and scroll reversal use the same contract', () => {
@@ -179,10 +183,10 @@ test('controller selects exactly one image/link; direct selections and scroll re
   assert.equal(section.dataset.activeScreen, 'workout');
   assert.equal(section.screens.filter(s => s.attrs['aria-hidden'] === 'false').length, 1);
   tops.splice(0, 5, -2500, -1700, -900, -100, 700);
-  events.scroll();
+  events.resize();
   assert.equal(section.dataset.activeScreen, 'workout');
   tops.splice(0, 5, 0, 800, 1600, 2400, 3200);
-  events.scroll();
+  events.resize();
   assert.equal(section.dataset.activeScreen, 'home');
   assert.equal(section.links.filter(s => s.attrs['aria-current'] === 'step').length, 1);
 });
@@ -199,9 +203,43 @@ test('separate instances keep independent state and image failures restore inlin
   assert.equal(two.classes.has('is-enhanced'), true);
 });
 
-test('reduced motion and short viewports do not enable sticky screen swapping', () => {
-  for (const flags of [{ reduced: true }, { short: true }]) {
-    const { sections: [section] } = mount(flags);
-    assert.equal(section.classes.has('is-enhanced'), false);
+test('reduced motion retains inline fallback without conflating short height', () => {
+  assert.equal(mount({reduced:true}).sections[0].classes.has('is-enhanced'),false);
+  assert.equal(mount({short:true}).sections[0].classes.has('is-enhanced'),true);
+});
+
+test('cached Trainer geometry follows actual scroll and reverse without a layout re-read', () => {
+  const m=mount();
+  for(const step of m.sections[0].steps) step.getBoundingClientRect=()=>{throw new Error('geometry read during scroll');};
+  m.scroll(2200); assert.equal(m.sections[0].dataset.activeScreen,'workout');
+  m.scroll(10000); assert.equal(m.sections[0].dataset.activeScreen,'agenda');
+  m.scroll(0); assert.equal(m.sections[0].dataset.activeScreen,'home');
+  assert.equal(m.sections[0].dataset.showcaseProgress,'0.140625');
+});
+
+test('compact Trainer traverses all five real-source copies and reverses deterministically',()=>{
+  for(const [width,height] of [[320,568],[375,812],[768,1024],[844,390]]) {
+    const m=mount({width,height,stageHeight:280}), section=m.sections[0];
+    assert.ok(section.classes.has('is-compact-story'));
+    const run=Number.parseFloat(section.style.values['--showcase-step-run'])*4;
+    const origin=2000-(width<=768?82:94);
+    for(const [p,key] of [[0,'home'],[.25,'calendar'],[.5,'clients'],[.75,'workout'],[1,'agenda'],[.25,'calendar'],[0,'home']]) {
+      m.scroll(origin+run*p);
+      assert.equal(section.dataset.activeScreen,key);
+      assert.equal(section.copy.rendered.key,key);
+      assert.equal(section.screens.filter(s=>s.attrs['aria-hidden']==='false').length,1);
+    }
+    assert.ok(section.steps.every(step=>step.inert && step.attrs['aria-hidden']==='true'));
   }
+});
+
+test('measured overflow/media error/reduced motion restore all Trainer source content',()=>{
+  const overflow=mount({width:320,height:568,stageHeight:600}).sections[0];
+  assert.equal(overflow.dataset.showcaseMode,'content-overflow');
+  assert.ok(overflow.steps.every(step=>!step.inert && step.attrs['aria-hidden']===undefined));
+  const m=mount({width:375,height:812}), section=m.sections[0];
+  section.screens[0].handlers.error();
+  assert.equal(section.dataset.showcaseMode,'media-error');
+  assert.ok(section.steps.every(step=>!step.inert));
+  assert.equal(mount({width:375,height:812,reduced:true}).sections[0].dataset.showcaseMode,'reduced-motion');
 });

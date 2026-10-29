@@ -46,7 +46,6 @@
 .is-scroll-enhanced .ecosystem-phone img { width: auto; height: min(30svh,280px); }
 .is-scroll-enhanced .ecosystem-client { min-height: 0; height: min(32svh,300px); padding-block: 20px; }
 @media (max-width:959px), (prefers-reduced-motion:reduce) {
-  .is-scroll-enhanced .ecosystem-transfer { display: none; }
   .ecosystem-connected { gap: 20px; }
   .ecosystem-connected img { width: 56px; height: 56px; }
   .ecosystem-connected::before { top: 28px; }
@@ -87,8 +86,77 @@
 .is-scroll-enhanced .story-copy p { font-size: .92rem; }
 .is-scroll-enhanced .story-counter, .is-scroll-enhanced .story-steps { display: flex; }
 .is-scroll-enhanced .story-controls { margin-top: 12px; }
-/* CSS is also fail-safe if OS motion preferences change before the controller runs. */
-@media (max-width:959px), (max-height:699px), (prefers-reduced-motion:reduce) {
+/* Narrow is enhanced, not reduced motion. Intro remains in normal document flow. */
+@media (max-width:1023px) {
+  .is-scroll-enhanced .story-intro { padding-block: 56px 24px; }
+  .is-scroll-enhanced .story-pin { top: 94px; padding-block: 8px; }
+  #desktop.is-scroll-enhanced .desktop-feature__visual { width: 100%; }
+  .is-scroll-enhanced .story-slide .app-frame { padding: 6px; }
+  .is-scroll-enhanced .story-slide .app-frame__bar { height: 14px; }
+  .is-scroll-enhanced .story-copy { margin-top: 12px; }
+  .is-scroll-enhanced .story-copy h3 { font-size: 1.125rem; }
+  .is-scroll-enhanced .story-copy p { font-size: .95rem; line-height: 1.45; }
+}
+@media (max-width:767px) {
+  .is-scroll-enhanced .story-pin { top: 82px; }
+  .is-scroll-enhanced .story-slide .story-screen-focus { height: clamp(148px,28svh,240px); position: relative; overflow: hidden; border-radius: 8px; }
+  .is-scroll-enhanced .story-screen-focus .screenshot-image { width: 100%; height: 100%; object-fit: cover; object-position: 65% 20%; transform: scale(1.6); transform-origin: 65% 20%; }
+  .is-scroll-enhanced .story-screen-focus .image-zoom { position: absolute; inset-inline-end: 8px; bottom: 8px; margin: 0; z-index: 1; }
+  .is-scroll-enhanced .story-controls { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 4px 12px; margin-top: 8px; }
+  .is-scroll-enhanced .story-steps { grid-column: 1 / -1; grid-row: 2; justify-content: space-between; gap: 0; }
+  .is-scroll-enhanced .story-controls > .text-link { grid-column: 2; grid-row: 1; justify-self: end; font-size: .85rem; min-height: 44px; display: inline-flex; align-items: center; }
+  .is-scroll-enhanced .story-counter { align-items: center; }
+  .is-scroll-enhanced .story-copy h3 { font-size: 1.05rem; line-height: 1.2; }
+  .is-scroll-enhanced .story-copy p { font-size: .9rem; line-height: 1.4; }
+}
+@media (max-width:768px) { .is-scroll-enhanced .story-pin { top: 82px; } }
+@media (max-height:519px) and (orientation:landscape) {
+  .is-scroll-enhanced .story-slide { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); align-items: center; gap: 16px; }
+  .is-scroll-enhanced .story-slide .desktop-feature__visual { margin-bottom: 0; }
+  .is-scroll-enhanced .story-copy { margin-top: 0; }
+  .is-scroll-enhanced .story-copy h3 { font-size: 1rem; }
+  .is-scroll-enhanced .story-copy p { font-size: .8rem; line-height: 1.35; }
+  .is-scroll-enhanced .story-slide .story-screen-focus { height: min(40svh,170px); }
+  .is-scroll-enhanced .story-controls { display: flex; gap: 4px 12px; margin-top: 4px; }
+  .is-scroll-enhanced .story-controls .text-link { font-size: .8rem; }
+}
+/* The two-node workflow remains a compact animated path on phones/tablets. */
+#ecosistema.is-scroll-enhanced .ecosystem-visual { height: calc(min(30svh,280px) + 96px); }
+#ecosistema.is-scroll-enhanced .ecosystem-visual .screenshot-image { height: min(30svh,280px); }
+.scroll-story.is-scroll-enhanced:not([data-story-mode="desktop"]) .story-track { transition: transform 220ms cubic-bezier(.16,1,.3,1); }
+@media (max-width:1023px), (max-height:649px) {
+  #ecosistema.is-scroll-enhanced .ecosystem-transfer { display: block; height: 68px; margin-bottom: 8px; }
+  #ecosistema .ecosystem-transfer::before { top: 44px; }
+  #ecosistema .ecosystem-transfer__tile { top: 24px; width: 136px; padding: 10px 8px; }
+  #ecosistema.is-scroll-enhanced .ecosystem-visual, #ecosistema.is-scroll-enhanced .ecosystem-final { height: 220px; min-height: 0; }
+  #ecosistema.is-scroll-enhanced .ecosystem-visual .screenshot-image { height: min(22svh,160px); }
+  #ecosistema.is-scroll-enhanced .story-screen-focus { height: min(22svh,160px); }
+  #ecosistema.is-scroll-enhanced .story-screen-focus .screenshot-image { height: 100%; }
+  #ecosistema.is-scroll-enhanced .ecosystem-phone img { height: min(22svh,160px); width: auto; }
+  #ecosistema .ecosystem-phone { padding: 4px; border-radius: 18px; }
+  #ecosistema .ecosystem-phone .image-zoom { padding: 4px 6px; margin-top: 4px; font-size: .75rem; }
+  #ecosistema .ecosystem-final > p { font-size: .85rem; }
+  #ecosistema .ecosystem-connected { gap: 12px; }
+}
+@media (max-height:649px) {
+  #ecosistema.is-scroll-enhanced .story-slide { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); align-items: center; gap: 12px; }
+  #ecosistema.is-scroll-enhanced .story-copy { margin-top: 0; }
+  #ecosistema .ecosystem-connected { grid-template-columns: minmax(0,1fr); gap: 12px; }
+  #ecosistema .ecosystem-connected::before { display: none; }
+  #ecosistema .ecosystem-connected > div { gap: 4px; }
+  #ecosistema .ecosystem-connected img { width: 40px; height: 40px; }
+  #ecosistema .ecosystem-connected span { font-size: .75rem; }
+  #ecosistema .ecosystem-final { gap: 8px; }
+}
+@media (max-height:519px) and (orientation:landscape) {
+  #ecosistema.is-scroll-enhanced .ecosystem-transfer { height: 56px; }
+  #ecosistema.is-scroll-enhanced .ecosystem-visual, #ecosistema.is-scroll-enhanced .ecosystem-final { height: 160px; }
+  #ecosistema.is-scroll-enhanced .ecosystem-visual .screenshot-image, #ecosistema.is-scroll-enhanced .story-screen-focus { height: 100px; }
+  #ecosistema.is-scroll-enhanced .ecosystem-phone img { height: 100px; }
+  #ecosistema .ecosystem-connected { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+/* No-JS is already sequential. This remains the CSS fail-safe for reduced motion. */
+@media (prefers-reduced-motion:reduce) {
   .scroll-story.is-scroll-enhanced { height: auto; padding: 78px 0; }
   .is-scroll-enhanced .story-pin { position: static; padding: 0; }
   .is-scroll-enhanced .story-window { overflow: visible; }

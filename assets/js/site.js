@@ -10,23 +10,35 @@
   var toggle = document.querySelector('.nav-toggle');
   var links = document.querySelector('.nav-links');
 
-  function closeMenu() {
+  function closeMenu(returnFocus) {
     if (!toggle || !links) return;
+    var wasOpen = links.classList.contains('is-open');
     links.classList.remove('is-open');
     toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Apri il menu');
+    if (returnFocus && wasOpen) toggle.focus({ preventScroll: true });
   }
 
   if (toggle && links) {
     toggle.addEventListener('click', function () {
       var open = links.classList.toggle('is-open');
       toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Chiudi il menu' : 'Apri il menu');
     });
     links.addEventListener('click', function (event) {
       if (event.target.closest('a')) closeMenu();
     });
     document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape') closeMenu();
+      if (event.key === 'Escape') closeMenu(true);
     });
+    document.addEventListener('click', function (event) {
+      if (!links.contains(event.target) && !toggle.contains(event.target)) closeMenu();
+    });
+    document.addEventListener('focusin', function (event) {
+      if (!links.contains(event.target) && event.target !== toggle) closeMenu();
+    });
+    window.addEventListener('pageshow', function () { closeMenu(); });
+    window.matchMedia('(min-width: 769px)').addEventListener('change', function () { closeMenu(); });
   }
 
   function updateHeader() {
@@ -52,7 +64,9 @@
     expanded.src = image.currentSrc || image.src;
     expanded.alt = image.alt;
     lightbox.classList.toggle('image-dialog--portrait', image.naturalHeight > image.naturalWidth);
-    lightbox.querySelector('p').textContent = image.alt;
+    var readableDesktop = image.naturalWidth > 800 && image.naturalWidth > image.naturalHeight && window.innerWidth < 768;
+    lightbox.classList.toggle('image-dialog--detail', readableDesktop);
+    lightbox.querySelector('p').textContent = image.alt + (readableDesktop ? '. Schermata completa: scorri nell’immagine per esplorarla.' : '');
     lightbox.showModal();
     root.classList.add('has-dialog');
   }

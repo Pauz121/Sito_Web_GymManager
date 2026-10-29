@@ -56,9 +56,9 @@ function mount({reduced=false,narrow=false,failed=false}={}) {
   const slides=Array.from({length:6},()=>({inert:false,setAttribute(k,v){this[k]=v;},removeAttribute(k){delete this[k];}}));
   const buttons=slides.map(()=>({handlers:{},setAttribute(k,v){this[k]=v;},removeAttribute(k){delete this[k];},addEventListener(k,fn){this.handlers[k]=fn;}}));
   const image={complete:failed,naturalWidth:failed?0:1600,addEventListener(k,fn){this[k]=fn;}};
-  const pin={getBoundingClientRect:()=>({height:600,width:1100})};
+  const pin={getBoundingClientRect:()=>({height:narrow?440:600,width:narrow?347:1100})};
   const section={dataset:{},style:{setProperty(k,v){vars[k]=v;},removeProperty(k){delete vars[k];}},classList:{add(k){classes.add(k);},remove(...keys){keys.forEach(k=>classes.delete(k));},toggle(k,on){on?classes.add(k):classes.delete(k);}},getBoundingClientRect:()=>({top,bottom:top+3500}),querySelector(s){return s==='[data-story-track]'?{}:s==='.story-pin'?pin:s==='[data-story-counter]'?attrs:{getBoundingClientRect:()=>({height:150})};},querySelectorAll(s){return s==='[data-story-slide]'?slides:s==='[data-story-go]'?buttons:[image];}};
-  const sandbox=vm.createContext({document:{hidden:false,querySelectorAll:()=>[section],addEventListener(k,fn){events[k]=fn;}},window:{innerHeight:900,scrollY:1000,matchMedia:q=>({matches:q.includes('reduce')?reduced:!narrow,addEventListener(){}}),addEventListener(k,fn){events[k]=fn;},requestAnimationFrame:fn=>fn(),scrollTo(value){scroll=value;}}});
+  const sandbox=vm.createContext({document:{hidden:false,querySelectorAll:()=>[section],addEventListener(k,fn){events[k]=fn;}},window:{innerWidth:narrow?375:1440,innerHeight:narrow?812:900,scrollY:1000,matchMedia:q=>({matches:q.includes('reduce')?reduced:!narrow,addEventListener(){}}),addEventListener(k,fn){events[k]=fn;},requestAnimationFrame:fn=>fn(),scrollTo(value){scroll=value;}}});
   vm.runInContext(source,sandbox);
   return {section,slides,buttons,image,classes,vars,events,scroll:()=>scroll,move(value){top=value;events.scroll();}};
 }
@@ -70,10 +70,27 @@ test('real controller changes horizontal transform, active slide, inert and coun
   assert.equal(m.buttons[0]['aria-current'],'step');
   m.buttons[5].handlers.click(); assert.ok(m.scroll().top>1000);
 });
-test('reduced motion, narrow viewport and image failure expose every slide with no inert content',()=>{
-  for(const flags of [{reduced:true},{narrow:true},{failed:true}]) {
+test('only reduced motion and image failure expose sequential fallback; mobile remains enhanced',()=>{
+  for(const flags of [{reduced:true},{failed:true}]) {
     const m=mount(flags); assert.equal(m.classes.has('is-scroll-enhanced'),false);
     assert.ok(m.slides.every(s=>!s.inert && s['aria-hidden']===undefined));
   }
   const m=mount(); m.image.error(); assert.equal(m.classes.has('is-scroll-enhanced'),false);
+  const mobile=mount({narrow:true}); assert.equal(mobile.classes.has('is-scroll-enhanced'),true);
+  assert.equal(mobile.section.dataset.storyMode,'mobile');
+  mobile.move(-700); assert.notEqual(mobile.section.dataset.storyActive,'0');
+  mobile.move(500); assert.equal(mobile.section.dataset.storyActive,'0');
+});
+
+test('content-based modes preserve enhancement on phones, tablets and mobile landscape',()=>{
+  const {modeFor}=sandbox.GymManagerStory;
+  for(const [width,height,mode] of [[320,568,'mobile'],[375,812,'mobile'],[768,1024,'tablet'],[1024,768,'desktop'],[844,390,'landscape']]) assert.equal(modeFor(width,height),mode);
+});
+
+test('compact stories settle complete steps between scroll events; Desktop remains continuous',()=>{
+  const {visualPosition}=sandbox.GymManagerStory;
+  for(const mode of ['mobile','tablet','landscape']) {
+    for(const p of [0,.12,.37,.51,.83,1,.37]) assert.equal(visualPosition(p,6,mode),Math.round(p*5));
+  }
+  assert.equal(visualPosition(.37,6,'desktop'),1.85);
 });

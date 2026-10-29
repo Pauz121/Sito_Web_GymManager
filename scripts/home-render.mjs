@@ -3,6 +3,11 @@ import { escapeHtml as e, featureFigure } from './desktop-render.mjs';
 import { siteFeatures } from './site-config.mjs';
 
 export const homeDesktopSlugs = ['dashboard','clienti','schede-allenamento','alimentazione','progressi','agenda'];
+// Existing real screenshots only. The mobile viewport reveals a focus region;
+// the original remains available through the existing image dialog.
+function storyVisual(html) {
+  return html.replace(/(<img\b[^>]*class="screenshot-image"[^>]*>)/, '<div class="story-screen-focus">$1</div>');
+}
 export function renderScrollStory({ id, title, description, slides, cta, className = '', accessory = '' }) {
   return '<section class="section scroll-story ' + className + '" id="' + id + '" aria-labelledby="' + id + '-heading" data-scroll-story>' +
     '<div class="story-intro container"><header class="story-heading"><h2 id="' + id + '-heading">' + title + '</h2><p>' + description + '</p></header></div><div class="story-pin container">' +
@@ -26,7 +31,7 @@ export function renderHomeClient() {
 
 export function renderHomeEcosystem({ includeClient = siteFeatures.clientMarketing } = {}) {
   const workout = desktopFeatures.find(item=>item.slug==='schede-allenamento');
-  const desktop = '<div class="ecosystem-visual ecosystem-visual--desktop">' + featureFigure(workout) + '</div>';
+  const desktop = '<div class="ecosystem-visual ecosystem-visual--desktop">' + storyVisual(featureFigure(workout)) + '</div>';
   const trainer = '<figure class="ecosystem-visual"><div class="ecosystem-phone"><img data-screenshot src="assets/screenshots/ios-trainer-workout.webp" alt="Schermata reale della scheda del cliente DEMO nell’app iOS Trainer" width="400" height="816" loading="lazy" decoding="async"></div><figcaption class="media-caption">App Trainer: schermata reale, solo dati DEMO.</figcaption></figure>';
   const client = '<figure class="ecosystem-visual"><div class="ecosystem-client"><img src="assets/brand/client-logo.webp" alt="Icona originale dell’app Client FitManager" width="256" height="256" loading="lazy" decoding="async"><strong>App Client</strong><span>Schermata in preparazione</span></div><figcaption class="media-caption">Identità del prodotto Client, non una schermata simulata.</figcaption></figure>';
   const identities = '<div class="ecosystem-connected' + (includeClient ? '' : ' ecosystem-connected--trainer') + '"><div><img src="assets/brand/gymmanager-logo.webp" alt="Logo originale GymManager Desktop" width="48" height="48" loading="lazy"><strong>Desktop</strong><span>Prepara e assegna</span></div><div><img src="assets/brand/gymmanager-logo.webp" alt="Logo originale GymManager Trainer" width="48" height="48" loading="lazy"><strong>Trainer iOS</strong><span>Consulta in mobilità</span></div>' + (includeClient ? '<div><img src="assets/brand/client-logo.webp" alt="Icona originale FitManager Client" width="48" height="48" loading="lazy"><strong>Client iOS</strong><span>Segue il proprio piano</span></div>' : '') + '</div>';
@@ -48,7 +53,7 @@ export function renderHomeDesktopStory() {
     slides:homeDesktopSlugs.map(slug => {
       const feature=desktopFeatures.find(item=>item.slug===slug);
       const ratio=feature.heroImage.width/feature.heroImage.height;
-      const visual=featureFigure(feature).replace('<figure ', '<figure style="--story-aspect: ' + ratio + '" ');
+      const visual=storyVisual(featureFigure(feature)).replace('<figure ', '<figure style="--story-aspect: ' + ratio + '" ');
       return { label:feature.title, visual, title:feature.subtitle, description:feature.shortDescription };
     }),
     cta:{href:'desktop/',text:'Approfondisci il Desktop'}
