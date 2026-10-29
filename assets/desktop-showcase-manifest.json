@@ -1,0 +1,16 @@
+{
+  "kind": "real-product-screenshots-not-generated-ui",
+  "privacy": "Visually reviewed original footage and selected frames. Trainer Demo and explicitly synthetic DEMO client records only in all newly extracted images. Existing selected Client/Workout/Nutrition/Progress demo screens reviewed and reused. No screenshot of client notes substituted for global Agenda.",
+  "newImages": [
+    {"path":"assets/screenshots/desktop-dashboard.webp","source":"Prima registrazione.mp4","timestamp":0,"sourceSha256":"d465055599af9c97c12953390c681baed29ca8ad5ddb5044574f7fb52c8b7cda","width":1600,"height":828,"sha256":"008b0d0495c2d048dedbca886e6edac025b8c6634a5afee201d390899b577eaa"},
+    {"path":"assets/screenshots/desktop-allenamenti.webp","source":"Prima registrazione.mp4","timestamp":86,"sourceSha256":"d465055599af9c97c12953390c681baed29ca8ad5ddb5044574f7fb52c8b7cda","width":1400,"height":726,"sha256":"9a2cd01ad2ff16e05e8868e33b175faebb4d6d8f03a68ceb960eb0351b27aea9"},
+    {"path":"assets/screenshots/desktop-pagamenti.webp","source":"Seconda registrazione.mp4","timestamp":46,"sourceSha256":"6641a464b2dcadf4d1bd98b0e2bb51e692e85b47dd2f54abd1c2408893a3411b","width":1600,"height":820,"sha256":"8c8f60a757de16a517255e251ea884569a77d49626d85b9af847d52d0cbd1c57"},
+    {"path":"assets/screenshots/desktop-agenda.webp","source":"User supplied Agenda screenshot 2026-10-26","sourceSha256":"48b69cd6522ee7a9dfcac15bdc783e74fd52635baeeadc7c336374d76ebaa567","width":1416,"height":881,"sha256":"8f210e1d5698e2c67b389bd5f4ac0024c86ba57664299d2ac54cfc8ae23e2c49","encoding":"lossless WebP, original unmodified"}
+  ],
+  "reusedImages": ["assets/screenshots/12-client-demo.webp","assets/screenshots/04-workout-plan.webp","assets/screenshots/07-nutrition-overview.webp","assets/screenshots/10-progress.webp","assets/screenshots/05-body-focus.webp","assets/screenshots/08-nutrition-client-plan.webp"],
+  "reusedProvenance": "assets/media-manifest.json",
+  "newImageOriginMetadata": "Three prior .webp.json sidecars from Impeccable embed-prompt, plus explicit source sidecar for user supplied lossless Agenda. Sidecars/manifests excluded from public dist; no UI generated.",
+  "pending": [],
+  "originalsModified": false,
+  "videosInPublicOutput": 0
+}

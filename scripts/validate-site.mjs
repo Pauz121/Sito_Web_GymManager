@@ -1,10 +1,11 @@
 import { readFile, access } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { pages, localTarget, isPublicAsset } from './public-files.mjs';
+import { pages, localTarget, isPublicAsset, renderSitePages } from './public-files.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const failures = [];
+const { canonicalPages, legacyTargets } = await import('./site-pages.mjs');
 
 function assert(condition, message) {
   if (!condition) failures.push(message);
@@ -14,10 +15,16 @@ function attributes(tag) {
   return Object.fromEntries([...tag.matchAll(/([\w-]+)=(?:"([^"]*)"|'([^']*)')/g)].map((match) => [match[1], match[2] ?? match[3]]));
 }
 
-const pageText = new Map();
+const pageText = await renderSitePages(root);
 for (const page of pages) {
-  const html = await readFile(join(root, page), 'utf8');
-  pageText.set(page, html);
+  const html = pageText.get(page);
+  if (!canonicalPages.includes(page)) {
+    assert(/http-equiv="refresh"/.test(html) && html.length < 1200, `${page}: solo alias redirect previsto`);
+    assert(!/<img|<script|<footer/.test(html), `${page}: contenuto duplicato nel redirect`);
+    const destination = html.match(/href="([^"]+)"/)?.[1];
+    assert(destination && localTarget(page, destination) === legacyTargets.get(page).split('#')[0], `${page}: redirect fuori destinazione`);
+    continue;
+  }
   const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
   assert(new Set(ids).size === ids.length, `${page}: ID duplicati`);
   assert((html.match(/<h1\b/g) ?? []).length === 1, `${page}: serve un solo titolo principale`);
@@ -30,10 +37,10 @@ for (const page of pages) {
   assert(/<nav[^>]+aria-label=/i.test(html), `${page}: nav senza nome accessibile`);
   assert(!/<meta[^>]+name="(generator|google-site-verification)"/i.test(html), `${page}: metadata non autorizzato`);
   assert(!/(google-analytics|googletagmanager|facebook\.net|meta-pixel)/i.test(html), `${page}: tracking rilevato`);
-  const legalPage = page === 'privacy/index.html' || page === 'support/index.html';
+  const productHtml = page.startsWith('privacy/') ? '' : html;
   // Factual provider disclosure on a legal draft is not a purchase integration.
   assert(!/(checkout|prova gratuita|abbonamento mensile)/i.test(html), `${page}: contenuto commerciale non consentito`);
-  if (!legalPage) assert(!/stripe/i.test(html), `${page}: contenuto commerciale non consentito`);
+  assert(!/stripe/i.test(productHtml), `${page}: contenuto commerciale non consentito`);
   assert(!/(?:src|href)="[^"\s]*(?:stripe\.com|buy\.stripe|checkout)/i.test(html), `${page}: pagamento esterno non consentito`);
   assert(!/SCREENSHOT REQUIRED|screenshot-placeholder/.test(html), `${page}: placeholder ancora presente`);
   assert(!/0\.1\.8/.test(html), `${page}: versione obsoleta hardcoded`);
@@ -66,7 +73,7 @@ for (const page of pages) {
     if (/^(https?:|mailto:|#)/.test(href)) continue;
     const [target] = href.split('#');
     if (!target) continue;
-    try { await access(join(root, localTarget(page, target))); }
+    try { const resolved = localTarget(page, target); if (!pageText.has(resolved)) await access(join(root, resolved)); }
     catch { assert(false, `${page}: link interno non trovato ${target}`); }
   }
 }
@@ -106,4 +113,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`VALIDATION PASSED: ${pages.length} pagine, link/metadata/accessibilità di base e strategia release verificate.`);
+console.log(`VALIDATION PASSED: ${canonicalPages.length} pagine reali + ${legacyTargets.size} alias di compatibilità, link/metadata/accessibilità di base e strategia release verificati.`);

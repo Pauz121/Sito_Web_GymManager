@@ -1,0 +1,13 @@
+{
+  "$schema": "https://unpkg.com/wrangler/config-schema.json",
+  "name": "gym-manager",
+  "compatibility_date": "2026-10-29",
+  "build": {
+    "command": "node scripts/validate-site.mjs && node scripts/prepare-public.mjs"
+  },
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "none"
+  }
+}

@@ -1,0 +1,51 @@
+/* One-page Desktop story: screens share the full width of the Home frame. */
+.desktop-story { border-top: 1px solid var(--line); }
+.desktop-story__intro { max-width: 72ch; margin-bottom: 36px; }
+.desktop-story__intro h2 { margin: 0 0 20px; font-size: clamp(2.2rem,4.6vw,3.6rem); line-height: 1.08; letter-spacing: -.035em; }
+.desktop-story__intro p { color: var(--ink-soft); font-size: 1.08rem; }
+.desktop-story__index { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-bottom: 64px; padding-block: 20px; border-block: 1px solid var(--line); }
+.desktop-story__index a { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink-soft); font-size: .9rem; font-weight: 700; }
+.desktop-story__index a:hover { color: var(--accent-dark); text-decoration: underline; text-underline-offset: 4px; }
+.desktop-chapter { padding-block: 64px 88px; border-bottom: 1px solid var(--line); scroll-margin-top: 104px; }
+.desktop-chapter:first-of-type { padding-top: 0; }
+.desktop-chapter__number { color: var(--accent-dark); font-size: .85rem; font-weight: 750; font-variant-numeric: tabular-nums; }
+.desktop-chapter__heading h3 { margin: 12px 0 14px; font-size: clamp(2rem,4vw,3.2rem); line-height: 1.1; letter-spacing: -.03em; }
+.desktop-chapter__heading p { margin: 0 0 30px; color: var(--ink-soft); font-size: 1.2rem; }
+.desktop-feature__visual { margin-block: 0 40px; width: 100%; }
+.desktop-feature__visual .screenshot-image { height: auto; border-radius: 12px; }
+.desktop-chapter__body { width: 100%; }
+.desktop-chapter__body > p, .desktop-chapter__body section > p, .desktop-chapter__capabilities p { max-width: 72ch; color: var(--ink-soft); }
+.desktop-chapter__lead { margin: 0 0 36px; font-size: 1.12rem; }
+.desktop-chapter__body > section { padding-block: 28px; border-top: 1px solid var(--line); }
+.desktop-chapter h4 { margin: 0 0 18px; font-size: clamp(1.4rem,2.6vw,1.8rem); line-height: 1.25; letter-spacing: -.02em; }
+.desktop-chapter h5 { margin: 24px 0 8px; font-size: 1.1rem; line-height: 1.4; }
+.desktop-chapter ul, .desktop-chapter ol { max-width: 72ch; margin: 0; padding-left: 24px; }
+.desktop-chapter li { padding-block: 6px; }
+.desktop-chapter__body .desktop-feature__visual { margin-block: 32px; }
+.desktop-extra { margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--line); scroll-margin-top: 104px; }
+.desktop-extra-copy { max-width: 72ch; }
+.desktop-extra .eyebrow { display: none; }
+.desktop-extra h5 { margin-top: 0; font-size: 1.25rem; }
+.desktop-extra .visual-card { margin-top: 28px; }
+.desktop-extra .visual-card img { width: 100%; height: auto; }
+.desktop-extra .detail-list { max-width: none; margin-bottom: 24px; }
+.desktop-extra .detail-list li { display: block; padding-block: 4px; }
+.desktop-extra .detail-list li::before { display: none; }
+.desktop-extra .model-flow { margin-bottom: 28px; }
+.desktop-image-pending { padding: 36px; color: var(--ink); background: var(--paper-deep); }
+.desktop-story .app-frame { transform: none; }
+@media (max-width:768px) {
+  .desktop-story__index { gap: 4px 18px; margin-bottom: 40px; }
+  .desktop-chapter { padding-block: 40px 56px; }
+  .desktop-chapter__heading p { font-size: 1.05rem; }
+  .desktop-feature__visual { padding: 8px; border-radius: 20px; margin-bottom: 28px; }
+  .desktop-feature__visual .app-frame__bar { height: 24px; }
+  .desktop-feature__visual .screenshot-image { border-radius: 8px; }
+  .desktop-chapter__body > section { padding-block: 24px; }
+}
+
+/* Phase architecture shell only; horizontal storytelling is the next approved block. */
+.desktop-preview__areas { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 0 0 24px; }
+.desktop-preview__areas a { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink); text-underline-offset: 5px; }
+.desktop-preview__areas a:hover { color: var(--accent-dark); }
+.route-trainer .section-heading h1, .route-client .section-heading h1, .route-desktop .section-heading h1 { font-size: clamp(2.5rem,5vw,4.5rem); line-height: 1.08; letter-spacing: -.03em; margin: 0 0 24px; }

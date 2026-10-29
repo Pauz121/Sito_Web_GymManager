@@ -82,9 +82,7 @@ test('public package excludes all originals, QA, scripts, reports and handoff', 
       if (entry.isDirectory()) { assert.ok(!/^(img|\.qa|scripts)$/.test(entry.name)); await walk(path); }
       else {
         assert.ok(!/\.md$|\.jfif$/i.test(entry.name));
-        // The full 89s Trainer overview has its own reviewed 5MB budget; old clips retain 4MB.
-        const budget = entry.name === 'ios-trainer-overview-web.mp4' ? 5_000_000 : 4_000_000;
-        assert.ok((await stat(path)).size < budget);
+        assert.ok((await stat(path)).size < 4_000_000);
       }
     }
   }

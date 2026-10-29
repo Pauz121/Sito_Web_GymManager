@@ -1,5 +1,7 @@
 # GymManager Website — release preparation, 26 ottobre 2026
 
+> Historical publication checkpoint c7aa6cc. The Trainer presentation described below was subsequently replaced locally by the five-screen scroll showcase. See TRAINER_SHOWCASE_REPORT.md for current implementation and tests. That subsequent task has NOT been committed/pushed/deployed; the pre-existing user-modified recording is preserved and excluded from current public output.
+
 ## Risultato e confini
 
 Evoluzione del sito esistente, non ricostruzione. Cinque pagine statiche HTML/CSS/JavaScript vanilla, senza package manager, dipendenze, framework o lockfile. Nessuna modifica ai sorgenti Desktop/Trainer iOS/IOS_Client, al database, a Supabase o ai workflow applicativi. Nuovo repository pubblico dedicato: Pauz121/Sito_Web_GymManager, main, preesistente e vuoto alla verifica iniziale.

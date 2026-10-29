@@ -45,6 +45,20 @@
   lightbox.innerHTML = '<form method="dialog"><button class="button button--secondary" type="submit" autofocus>Chiudi immagine <span aria-hidden="true">×</span></button></form><img alt=""><p></p>';
   document.body.appendChild(lightbox);
   var lastImageButton;
+  function openImage(image, trigger) {
+    if (!image || typeof lightbox.showModal !== 'function') return;
+    lastImageButton = trigger;
+    var expanded = lightbox.querySelector('img');
+    expanded.src = image.currentSrc || image.src;
+    expanded.alt = image.alt;
+    lightbox.classList.toggle('image-dialog--portrait', image.naturalHeight > image.naturalWidth);
+    lightbox.querySelector('p').textContent = image.alt;
+    lightbox.showModal();
+    root.classList.add('has-dialog');
+  }
+  document.addEventListener('gymmanager:image-open', function (event) {
+    openImage(event.detail.image, event.detail.trigger);
+  });
   lightbox.addEventListener('close', function () {
     root.classList.remove('has-dialog');
     if (lastImageButton) lastImageButton.focus({ preventScroll: true });
@@ -68,13 +82,7 @@
         button.setAttribute('aria-label', 'Ingrandisci: ' + image.alt);
         button.setAttribute('aria-haspopup', 'dialog');
         button.addEventListener('click', function () {
-          lastImageButton = button;
-          var expanded = lightbox.querySelector('img');
-          expanded.src = image.currentSrc || image.src;
-          expanded.alt = image.alt;
-          lightbox.querySelector('p').textContent = image.alt;
-          lightbox.showModal();
-          root.classList.add('has-dialog');
+          openImage(image, button);
         });
         image.insertAdjacentElement('afterend', button);
       }
@@ -113,28 +121,6 @@
     video.querySelectorAll('source').forEach(function (source) { source.addEventListener('error', videoError); });
   });
 
-  document.querySelectorAll('[data-video-restart]').forEach(function (button) {
-    button.addEventListener('click', function () {
-      var video = document.getElementById(button.getAttribute('aria-controls'));
-      if (!video) return;
-      video.scrollIntoView({ block: 'center', behavior: 'instant' });
-      video.focus({ preventScroll: true });
-      video.currentTime = 0;
-      var playback = video.play();
-      if (playback) playback.catch(function () { video.focus(); });
-    });
-  });
-  // Never resume automatically: scroll/visibility may pause, only the visitor plays.
-  if ('IntersectionObserver' in window) {
-    var videoVisibility = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        // A queued observation may predate a user-initiated restart/scroll.
-        var bounds = entry.target.getBoundingClientRect();
-        if (!entry.isIntersecting && (bounds.bottom <= 0 || bounds.top >= window.innerHeight)) entry.target.pause();
-      });
-    });
-    document.querySelectorAll('video[data-pause-offscreen]').forEach(function (video) { videoVisibility.observe(video); });
-  }
   document.addEventListener('visibilitychange', function () {
     if (document.hidden) videos.forEach(function (video) { video.pause(); });
   });

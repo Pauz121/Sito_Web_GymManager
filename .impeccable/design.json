@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-26T15:05:09Z",
+  "title": "Design System: GymManager website",
+  "extensions": {
+    "colorMeta": {
+      "accent": { "role": "primary", "displayName": "Rosso GymManager", "tonalRamp": ["oklch(15% 0.2085 21.1)", "oklch(26.4% 0.2085 21.1)", "oklch(37.9% 0.2085 21.1)", "oklch(49.3% 0.2085 21.1)", "oklch(60.7% 0.2085 21.1)", "oklch(72.1% 0.2085 21.1)", "oklch(83.6% 0.2085 21.1)", "oklch(95% 0.2085 21.1)"] },
+      "accent-dark": { "role": "primary", "displayName": "Rosso profondo", "tonalRamp": ["oklch(15% 0.1766 21.0)", "oklch(26.4% 0.1766 21.0)", "oklch(37.9% 0.1766 21.0)", "oklch(49.3% 0.1766 21.0)", "oklch(60.7% 0.1766 21.0)", "oklch(72.1% 0.1766 21.0)", "oklch(83.6% 0.1766 21.0)", "oklch(95% 0.1766 21.0)"] },
+      "accent-soft": { "role": "primary", "displayName": "Rosa chiaro", "tonalRamp": ["oklch(15% 0.0197 9.8)", "oklch(26.4% 0.0197 9.8)", "oklch(37.9% 0.0197 9.8)", "oklch(49.3% 0.0197 9.8)", "oklch(60.7% 0.0197 9.8)", "oklch(72.1% 0.0197 9.8)", "oklch(83.6% 0.0197 9.8)", "oklch(95% 0.0197 9.8)"] },
+      "ink": { "role": "neutral", "displayName": "Antracite", "tonalRamp": ["oklch(15% 0.0059 285.9)", "oklch(26.4% 0.0059 285.9)", "oklch(37.9% 0.0059 285.9)", "oklch(49.3% 0.0059 285.9)", "oklch(60.7% 0.0059 285.9)", "oklch(72.1% 0.0059 285.9)", "oklch(83.6% 0.0059 285.9)", "oklch(95% 0.0059 285.9)"] },
+      "ink-soft": { "role": "neutral", "displayName": "Grigio morbido", "tonalRamp": ["oklch(15% 0.0127 285.9)", "oklch(26.4% 0.0127 285.9)", "oklch(37.9% 0.0127 285.9)", "oklch(49.3% 0.0127 285.9)", "oklch(60.7% 0.0127 285.9)", "oklch(72.1% 0.0127 285.9)", "oklch(83.6% 0.0127 285.9)", "oklch(95% 0.0127 285.9)"] },
+      "paper": { "role": "neutral", "displayName": "Carta calda", "tonalRamp": ["oklch(15% 0.0045 78.3)", "oklch(26.4% 0.0045 78.3)", "oklch(37.9% 0.0045 78.3)", "oklch(49.3% 0.0045 78.3)", "oklch(60.7% 0.0045 78.3)", "oklch(72.1% 0.0045 78.3)", "oklch(83.6% 0.0045 78.3)", "oklch(95% 0.0045 78.3)"] },
+      "paper-deep": { "role": "neutral", "displayName": "Carta profonda", "tonalRamp": ["oklch(15% 0.0080 73.7)", "oklch(26.4% 0.0080 73.7)", "oklch(37.9% 0.0080 73.7)", "oklch(49.3% 0.0080 73.7)", "oklch(60.7% 0.0080 73.7)", "oklch(72.1% 0.0080 73.7)", "oklch(83.6% 0.0080 73.7)", "oklch(95% 0.0080 73.7)"] },
+      "white": { "role": "neutral", "displayName": "Bianco", "tonalRamp": ["oklch(15% 0 0)", "oklch(26.4% 0 0)", "oklch(37.9% 0 0)", "oklch(49.3% 0 0)", "oklch(60.7% 0 0)", "oklch(72.1% 0 0)", "oklch(83.6% 0 0)", "oklch(95% 0 0)"] },
+      "line": { "role": "neutral", "displayName": "Linea traslucida", "tonalRamp": ["oklch(15% 0.0059 285.9 / 0.12)", "oklch(26.4% 0.0059 285.9 / 0.12)", "oklch(37.9% 0.0059 285.9 / 0.12)", "oklch(49.3% 0.0059 285.9 / 0.12)", "oklch(60.7% 0.0059 285.9 / 0.12)", "oklch(72.1% 0.0059 285.9 / 0.12)", "oklch(83.6% 0.0059 285.9 / 0.12)", "oklch(95% 0.0059 285.9 / 0.12)"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display home", "purpose": "Titolo home; su mobile conserva il clamp specifico già presente nel CSS." },
+      "headline": { "displayName": "Titolo sezione", "purpose": "Sezioni generali, copy affiancato e CTA." },
+      "showcase-headline": { "displayName": "Titolo panoramica", "purpose": "Intestazioni delle panoramiche real-screen." },
+      "desktop-display": { "displayName": "Titolo approfondimento Desktop", "purpose": "Titolo di ingresso delle otto pagine Desktop." },
+      "desktop-headline": { "displayName": "Sottosezione Desktop", "purpose": "Blocchi di lettura interni alle pagine Desktop." },
+      "title": { "displayName": "Titolo card funzionale", "purpose": "Scala delle card funzionali esistenti, non di ogni card del sito." },
+      "body": { "displayName": "Corpo", "purpose": "Paragrafi correnti; lo stack dichiara Inter senza distribuirlo e usa il fallback di sistema." },
+      "label": { "displayName": "Occhiello", "purpose": "Etichetta in maiuscolo con breve tratto iniziale." },
+      "button": { "displayName": "Pulsante", "purpose": "Azioni principali e secondarie." },
+      "status": { "displayName": "Stato", "purpose": "Badge informativo compatto e non interattivo." }
+    },
+    "shadows": [
+      { "name": "shadow", "value": "0 22px 60px rgba(36, 29, 29, .1), 0 4px 14px rgba(36, 29, 29, .05)", "purpose": "Ombra condivisa per superfici sollevate, dialogo e media; sorgente --shadow." },
+      { "name": "clay-shadow", "value": "12px 12px 28px rgba(83, 69, 62, .11), -12px -12px 28px rgba(255, 255, 255, .85)", "purpose": "Rilievo morbido delle cornici e di alcune card chiare; sorgente --clay-shadow." },
+      { "name": "button-primary", "value": "0 12px 26px rgba(217,41,63,.25)", "purpose": "Ombra locale del pulsante primario." },
+      { "name": "button-secondary", "value": "6px 6px 16px rgba(80,68,63,.08), -6px -6px 16px rgba(255,255,255,.7)", "purpose": "Rilievo locale del pulsante secondario." }
+    ],
+    "motion": [
+      { "name": "button-transition", "value": "transform .2s ease, box-shadow .2s ease, background .2s ease", "purpose": "Hover dei pulsanti; sollevamento presente nel CSS." },
+      { "name": "text-link-arrow", "value": "transform .2s ease", "purpose": "Piccolo spostamento della freccia del link testuale." },
+      { "name": "screen-crossfade", "value": "opacity 220ms cubic-bezier(.16, 1, .3, 1), visibility 220ms", "purpose": "Cambio della schermata attiva, mantenendo stabile la cornice." },
+      { "name": "reveal", "value": "opacity .55s ease, transform .55s ease", "purpose": "Reveal già presenti nel sito; i contenuti restano visibili senza JavaScript." },
+      { "name": "reduced-motion", "value": ".01ms", "purpose": "Durata di transizione e animazione nell'override prefers-reduced-motion; scorrimento auto e contenuti visibili." }
+    ],
+    "breakpoints": [
+      { "name": "tablet", "value": "1024px" },
+      { "name": "compact-desktop-nav", "value": "900px" },
+      { "name": "mobile", "value": "768px" },
+      { "name": "small-mobile", "value": "480px" },
+      { "name": "short-viewport-height", "value": "600px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Pulsante primario",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Azione rossa principale, con hover, focus da tastiera e stato disabilitato già esistenti.",
+      "html": "<button class=\"ds-button-primary\" type=\"button\">Scarica GymManager</button>",
+      "css": ".ds-button-primary { min-height:48px; display:inline-flex; align-items:center; justify-content:center; gap:9px; padding:0 21px; border:1px solid transparent; border-radius:15px; color:var(--white); background:var(--accent); font-family:var(--font); font-size:16px; font-weight:800; line-height:1.2; cursor:pointer; box-shadow:0 12px 26px rgba(217,41,63,.25); transition:transform .2s ease,box-shadow .2s ease,background .2s ease; } .ds-button-primary:hover { transform:translateY(-2px); background:var(--accent-dark); } .ds-button-primary:focus-visible { outline:3px solid var(--accent-dark); outline-offset:4px; } .ds-button-primary:disabled,.ds-button-primary[aria-disabled=\"true\"] { color:#85858b; background:#e6e3df; box-shadow:none; cursor:not-allowed; transform:none; } @media(prefers-reduced-motion:reduce) { .ds-button-primary { transition-duration:.01ms; } }"
+    },
+    {
+      "name": "Pulsante secondario",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Azione su superficie chiara traslucida, usata anche per gli approfondimenti inline.",
+      "html": "<button class=\"ds-button-secondary\" type=\"button\">Approfondisci</button>",
+      "css": ".ds-button-secondary { min-height:48px; display:inline-flex; align-items:center; justify-content:center; gap:9px; padding:0 21px; border:1px solid var(--line); border-radius:15px; color:var(--ink); background:rgba(255,255,255,.66); font-family:var(--font); font-size:16px; font-weight:800; line-height:1.2; cursor:pointer; box-shadow:6px 6px 16px rgba(80,68,63,.08),-6px -6px 16px rgba(255,255,255,.7); transition:transform .2s ease,box-shadow .2s ease,background .2s ease; } .ds-button-secondary:hover { transform:translateY(-2px); } .ds-button-secondary:focus-visible { outline:3px solid var(--accent-dark); outline-offset:4px; } .ds-button-secondary:disabled,.ds-button-secondary[aria-disabled=\"true\"] { color:#85858b; background:#e6e3df; box-shadow:none; cursor:not-allowed; transform:none; } @media(prefers-reduced-motion:reduce) { .ds-button-secondary { transition-duration:.01ms; } }"
+    },
+    {
+      "name": "Link testuale con freccia",
+      "kind": "custom",
+      "refersTo": "text-link",
+      "description": "Collegamento di approfondimento leggero, con freccia che si sposta all'hover.",
+      "html": "<a class=\"ds-text-link\" href=\"#ecosistema\">Conosci l’ecosistema</a>",
+      "css": ".ds-text-link { display:inline-flex; align-items:center; gap:8px; color:var(--accent-dark); font-family:var(--font); font-size:16px; font-weight:800; line-height:1.65; text-decoration:none; } .ds-text-link::after { content:'→'; transition:transform .2s ease; } .ds-text-link:hover::after { transform:translateX(4px); } .ds-text-link:focus-visible { outline:3px solid var(--accent-dark); outline-offset:4px; } @media(prefers-reduced-motion:reduce) { .ds-text-link::after { transition-duration:.01ms; } }"
+    },
+    {
+      "name": "Navigazione dello showcase",
+      "kind": "nav",
+      "refersTo": "showcase-nav",
+      "description": "Anchor reali con stato aria-current, indicatore inferiore, hover e focus; nessun contenuto nascosto a tab.",
+      "html": "<nav class=\"ds-showcase-nav\" aria-label=\"Scegli un’area Desktop\"><a href=\"#desktop-dashboard\" aria-current=\"step\">Dashboard</a><a href=\"#desktop-clienti\">Clienti</a><a href=\"#desktop-allenamenti\">Allenamenti</a></nav>",
+      "css": ".ds-showcase-nav { display:flex; justify-content:center; flex-wrap:wrap; gap:0 4px; margin-top:14px; font-family:var(--font); line-height:1.65; } .ds-showcase-nav a { min-height:44px; display:inline-flex; align-items:center; padding:6px 8px; border-bottom:2px solid transparent; color:var(--ink-soft); font-size:.82rem; text-decoration:none; } .ds-showcase-nav a:hover,.ds-showcase-nav a[aria-current=\"step\"] { color:var(--accent-dark); border-color:var(--accent-dark); } .ds-showcase-nav a[aria-current=\"step\"] { font-weight:800; } .ds-showcase-nav a:focus-visible { outline:3px solid var(--accent-dark); outline-offset:4px; }"
+    },
+    {
+      "name": "Badge di stato",
+      "kind": "chip",
+      "refersTo": "status",
+      "description": "Etichetta statica delle card ecosistema; non ha stati interattivi nell'implementazione.",
+      "html": "<span class=\"ds-status\">In validazione</span>",
+      "css": ".ds-status { display:inline-block; align-self:flex-start; padding:6px 10px; border-radius:999px; color:#606069; background:#e7e4df; font-family:var(--font); font-size:.67rem; font-weight:900; line-height:1.65; letter-spacing:.09em; text-transform:uppercase; }"
+    },
+    {
+      "name": "Card ecosistema chiara",
+      "kind": "card",
+      "refersTo": "ecosystem-card",
+      "description": "Contenitore informativo delle companion; nessun hover o stato di selezione è presente nella sorgente.",
+      "html": "<article class=\"ds-ecosystem-card\"><span class=\"ds-ecosystem-status\">In validazione</span><h3>iOS Client</h3><p>Esperienza nativa separata per la consultazione del percorso cliente. Non è ancora presentata come rilascio pubblico.</p><small>Nessuna data di pubblicazione promessa</small></article>",
+      "css": ".ds-ecosystem-card { min-height:320px; display:flex; flex-direction:column; padding:34px; border:1px solid var(--line); border-radius:var(--radius-md); color:var(--ink); background:rgba(255,255,255,.6); font-family:var(--font); font-size:16px; line-height:1.65; } .ds-ecosystem-status { align-self:flex-start; margin-bottom:48px; padding:6px 10px; border-radius:999px; color:#606069; background:#e7e4df; font-size:.67rem; font-weight:900; letter-spacing:.09em; text-transform:uppercase; } .ds-ecosystem-card h3 { margin:0 0 12px; font-size:1.42rem; } .ds-ecosystem-card p { margin:0; color:var(--ink-soft); } .ds-ecosystem-card small { margin-top:auto; padding-top:24px; color:#64646d; }"
+    },
+    {
+      "name": "Card ecosistema Desktop",
+      "kind": "card",
+      "refersTo": "ecosystem-card-primary",
+      "description": "Variante scura che distingue il centro operativo Desktop; card statica, senza comportamento di pulsante.",
+      "html": "<article class=\"ds-ecosystem-primary\"><span class=\"ds-primary-status\">Desktop Windows</span><h3>Desktop Trainer</h3><p>Il gestionale completo per Windows: pianificazione, clienti, documenti, nutrizione, agenda, calendario e amministrazione quotidiana.</p><small>Centro operativo dell'ecosistema</small></article>",
+      "css": ".ds-ecosystem-primary { min-height:320px; display:flex; flex-direction:column; padding:34px; border:1px solid transparent; border-radius:var(--radius-md); color:var(--white); background:var(--ink); box-shadow:var(--shadow); font-family:var(--font); font-size:16px; line-height:1.65; } .ds-primary-status { align-self:flex-start; margin-bottom:48px; padding:6px 10px; border-radius:999px; color:#ffc2ca; background:rgba(217,41,63,.2); font-size:.67rem; font-weight:900; letter-spacing:.09em; text-transform:uppercase; } .ds-ecosystem-primary h3 { margin:0 0 12px; font-size:1.42rem; } .ds-ecosystem-primary p { margin:0; color:#b8b8c0; } .ds-ecosystem-primary small { margin-top:auto; padding-top:24px; color:#aaaab4; }"
+    },
+    {
+      "name": "Controllo ingrandimento immagine",
+      "kind": "button",
+      "refersTo": "image-zoom",
+      "description": "Pulsante nativo usato con il dialogo di immagini; lo snippet mostra il controllo e i suoi stati visivi, senza simulare il dialogo.",
+      "html": "<button class=\"ds-image-zoom\" type=\"button\" aria-haspopup=\"dialog\">Ingrandisci immagine</button>",
+      "css": ".ds-image-zoom { min-height:44px; display:inline-flex; align-items:center; margin:10px 0 0; padding:8px 14px; border:1px solid var(--line); border-radius:12px; color:var(--ink); background:var(--white); font-family:var(--font); font-size:.8rem; font-weight:750; line-height:1.65; cursor:pointer; } .ds-image-zoom:hover { color:var(--accent-dark); border-color:var(--accent); } .ds-image-zoom:focus-visible { outline:3px solid var(--accent-dark); outline-offset:4px; }"
+    },
+    {
+      "name": "Cornice Desktop con immagine in preparazione",
+      "kind": "custom",
+      "refersTo": "desktop-frame",
+      "description": "Stato reale dell'area Agenda priva di screenshot: cornice e messaggio esplicito, senza fabbricare UI o caricare un'immagine esterna.",
+      "html": "<figure class=\"ds-desktop-frame\"><div class=\"ds-desktop-pending\" role=\"img\" aria-label=\"Agenda: schermata reale non ancora disponibile\"><strong>Agenda</strong><span>Anteprima in preparazione</span><p>Stiamo preparando una cattura reale con dati DEMO. Intanto puoi scoprire come funziona questa area.</p></div><figcaption>Immagine reale ancora da acquisire. Nessuna interfaccia simulata.</figcaption></figure>",
+      "css": ".ds-desktop-frame { position:relative; margin:0; padding:13px; border:1px solid rgba(255,255,255,.8); border-radius:28px; background:rgba(255,255,255,.58); box-shadow:var(--clay-shadow); color:var(--ink); font-family:var(--font); font-size:16px; line-height:1.65; } .ds-desktop-pending { display:flex; min-height:280px; flex-direction:column; align-items:center; justify-content:center; gap:12px; padding:36px; border-radius:12px; background:var(--paper-deep); color:var(--ink); text-align:center; } .ds-desktop-pending strong { font-size:1.5rem; letter-spacing:-.025em; } .ds-desktop-pending span { color:var(--accent-dark); font-size:.9rem; font-weight:750; } .ds-desktop-pending p { max-width:42ch; margin:0; color:var(--ink-soft); font-size:.9rem; } .ds-desktop-frame figcaption { margin:12px 8px 4px; color:var(--ink-soft); font-size:.83rem; } @media(max-width:768px) { .ds-desktop-frame { padding:8px; border-radius:20px; } .ds-desktop-pending { min-height:220px; padding:28px 20px; } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Presentazione pratica del prodotto, nello stile esistente",
+    "overview": "Questa è un'etichetta descrittiva della direzione confermata dall'utente, non un nuovo concept. GymManager presenta il lavoro concreto del Trainer attraverso schermate autentiche, testo italiano diretto e una cornice visiva calda: carta chiara, antracite e accenti rossi. Il logo Trainer esistente resta l'asset di identità.\n\nLa composizione alterna titoli ampi, testo leggibile, superfici arrotondate e immagini del prodotto. Le ombre morbide danno presenza alle cornici, mentre le pagine di approfondimento usano soprattutto spazio e divisori. Questo documento registra l'implementazione attuale; non certifica l'accessibilità né introduce una nuova identità.",
+    "keyCharacteristics": [
+      "Carta calda, antracite e un unico accento rosso.",
+      "Titoli sans serif compatti, corpo arioso e testo italiano concreto.",
+      "Cornici morbide intorno a schermate autentiche con dati DEMO.",
+      "Scorrimento naturale e controlli HTML riconoscibili.",
+      "Adattamento verticale quando spazio o preferenze riducono il movimento."
+    ],
+    "rules": [
+      { "name": "The Existing Palette Rule", "body": "Riusa la palette osservata; non ricavare nuove superfici dai campioni interpolati del pannello.", "section": "colors" },
+      { "name": "The Natural Flow Rule", "body": "Lo scorrimento resta nativo; le ottimizzazioni sticky devono conservare una lettura completa nel flusso normale.", "section": "layout" }
+    ],
+    "dos": [
+      "Do riusare carta calda, antracite e rosso con le assegnazioni osservate.",
+      "Do mantenere lo stack font reale e il fallback di sistema senza dichiarare font distribuiti che non esistono.",
+      "Do mostrare schermate autentiche con dati DEMO e didascalie comprensibili.",
+      "Do preservare focus visibile, controlli nativi e lettura completa senza animazione.",
+      "Do lasciare gli slot media mancanti esplicitamente in preparazione."
+    ],
+    "donts": [
+      "Don't sostituire il logo Trainer o introdurre una nuova identità durante un'estensione dello stile esistente.",
+      "Don't fabbricare schermate del prodotto o usare un'altra funzione per coprire un'immagine mancante.",
+      "Don't trasformare le rampe illustrative del pannello in colori di produzione.",
+      "Don't aggiungere interazioni alle card o ai badge che il sito tratta come contenuto statico.",
+      "Don't trasformare il percorso di una singola surface in una composizione obbligatoria per tutto il sito."
+    ]
+  }
+}

@@ -9,25 +9,16 @@
   <meta property="og:description" content="Il lavoro quotidiano del Trainer, organizzato in un unico ambiente professionale.">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#18181b">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/brand/favicon.png" type="image/png">
   <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/desktop.css">
   <script defer src="assets/js/site.js"></script>
+  <script defer src="assets/js/app-showcase.js"></script>
   <script defer src="assets/js/download.js"></script>
 </head>
-<body>
+<body class="route-home" id="top">
   <a class="skip-link" href="#contenuto">Vai al contenuto</a>
-  <header class="site-header">
-    <nav class="nav container" aria-label="Navigazione principale">
-      <a class="brand" href="index.html" aria-label="GymManager, Home"><span class="brand-mark" aria-hidden="true">GM</span><span>GYMMANAGER</span></a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Apri il menu"><span></span></button>
-      <div class="nav-links" id="nav-links">
-        <a href="index.html" aria-current="page">Home</a>
-        <a href="funzionalita.html">Funzionalità</a>
-        <a href="download.html">Download</a>
-        <a class="button button--primary" href="download.html">Scarica</a>
-      </div>
-    </nav>
-  </header>
+  <!-- Shared header is rendered by scripts/site-layout.mjs. -->
 
   <main id="contenuto">
     <section class="hero">
@@ -37,8 +28,8 @@
           <h1>Il tuo lavoro da Trainer, <em>in un unico posto.</em></h1>
           <p>Clienti, allenamento, nutrizione, progressi, questionari e agenda: GymManager mette ordine nel lavoro quotidiano senza separare il percorso della persona dai tuoi strumenti.</p>
           <div class="hero-actions">
-            <a class="button button--primary" href="download.html">Scarica GymManager</a>
-            <a class="button button--secondary" href="#demo">Guarda il gestionale</a>
+            <a class="button button--primary" href="download/">Scarica GymManager</a>
+            <a class="button button--secondary" href="#desktop">Guarda il gestionale</a>
           </div>
           <div class="hero-meta" aria-label="Informazioni prodotto">
             <span>Desktop Windows</span>
@@ -63,151 +54,110 @@
       </div>
     </div>
 
-    <section class="section demo-section" id="demo">
-      <div class="container">
-        <div class="section-heading reveal"><span class="eyebrow">Guarda come funziona</span><h2>Meno da immaginare.<br>Più da vedere.</h2><p>Tre brevi registrazioni del gestionale in uso: apri una scheda, leggi i progressi, consulta un piano alimentare. Tutti i profili e i valori mostrati sono demo.</p></div>
-        <div class="demo-grid">
-          <article class="demo-card reveal">
-            <div class="demo-card__heading"><span class="demo-number">01 / PROGRAMMA</span><span>9 secondi · senza audio</span></div>
-            <video controls playsinline preload="none" width="1280" height="656" poster="assets/screenshots/05-body-focus.webp" aria-label="Registrazione reale: scheda di allenamento e analisi Body Focus">
-              <source src="assets/videos/workout-analysis.mp4" type="video/mp4">
-              <track kind="captions" src="assets/videos/workout-analysis.it.vtt" srclang="it" label="Descrizione italiana">
-              Il browser non supporta il video. <a href="assets/videos/workout-analysis.mp4">Apri la registrazione</a>.
-            </video>
-            <div class="demo-card__copy"><h3>Dalla scheda al focus muscolare.</h3><p>Sessioni, mappa corporea, volumi e radar: un colpo d'occhio sul programma demo.</p><a class="text-link" href="funzionalita.html#allenamento">Esplora l'allenamento</a></div>
-          </article>
-          <article class="demo-card reveal">
-            <div class="demo-card__heading"><span class="demo-number">02 / EVOLUZIONE</span><span>19 secondi · senza audio</span></div>
-            <video controls playsinline preload="none" width="1280" height="662" poster="assets/screenshots/10-progress.webp" aria-label="Registrazione reale: grafici dei progressi e plicometria su dati demo">
-              <source src="assets/videos/client-progress.mp4" type="video/mp4">
-              <track kind="captions" src="assets/videos/client-progress.it.vtt" srclang="it" label="Descrizione italiana">
-              Il browser non supporta il video. <a href="assets/videos/client-progress.mp4">Apri la registrazione</a>.
-            </video>
-            <div class="demo-card__copy"><h3>Il percorso prende forma.</h3><p>Confronta rilevazioni, peso, misure e composizione corporea nel tempo. Qui con valori sintetici.</p><a class="text-link" href="funzionalita.html#progressi">Scopri i progressi</a></div>
-          </article>
-          <article class="demo-card reveal">
-            <div class="demo-card__heading"><span class="demo-number">03 / NUTRIZIONE</span><span>4 secondi · senza audio</span></div>
-            <video controls playsinline preload="none" width="1280" height="656" poster="assets/screenshots/07-nutrition-overview.webp" aria-label="Registrazione reale: piano alimentare demo, giornate e pasti">
-              <source src="assets/videos/nutrition-plan.mp4" type="video/mp4">
-              <track kind="captions" src="assets/videos/nutrition-plan.it.vtt" srclang="it" label="Descrizione italiana">
-              Il browser non supporta il video. <a href="assets/videos/nutrition-plan.mp4">Apri la registrazione</a>.
-            </video>
-            <div class="demo-card__copy"><h3>Ogni giornata, ben organizzata.</h3><p>Dal riepilogo energetico ai pasti: alimenti, quantità e macro all'interno dello stesso piano.</p><a class="text-link" href="funzionalita.html#nutrizione">Esplora la nutrizione</a></div>
-          </article>
-        </div>
-        <p class="media-note">Registrazioni originali del prodotto, senza audio e senza avvio automatico. Le descrizioni sotto ogni video riassumono ciò che viene mostrato.</p>
-      </div>
-    </section>
+    <!-- DESKTOP_PREVIEW -->
 
-    <section class="section" id="cos-e">
+    <section class="section app-showcase" id="ios-trainer" aria-labelledby="trainer-overview-title" data-app-showcase>
       <div class="container">
-        <div class="section-heading reveal">
-          <span class="eyebrow">Cos'è GymManager</span>
-          <h2>Una base operativa unica per seguire il percorso del cliente.</h2>
-          <p>GymManager è un gestionale Desktop pensato per Personal Trainer e professionisti del fitness. Collega programmazione, appuntamenti e storico in un flusso leggibile, dal primo questionario al monitoraggio nel tempo.</p>
-        </div>
-        <div class="feature-grid">
-          <article class="feature-card reveal"><span class="feature-icon" aria-hidden="true">01</span><h3>Clienti</h3><p>Scheda centralizzata, overview, obiettivi, storico e collegamenti rapidi a ogni area del percorso.</p><a class="text-link" href="funzionalita.html#clienti">Scopri</a></article>
-          <article class="feature-card reveal"><span class="feature-icon" aria-hidden="true">02</span><h3>Allenamento</h3><p>Modelli riutilizzabili, sessioni, esercizi, settimane, progressioni e analisi Body Focus.</p><a class="text-link" href="funzionalita.html#allenamento">Scopri</a></article>
-          <article class="feature-card reveal"><span class="feature-icon" aria-hidden="true">03</span><h3>Nutrizione</h3><p>Modelli Standard e ON/OFF, pasti, alimenti, quantità realistiche e assegnazione al cliente.</p><a class="text-link" href="funzionalita.html#nutrizione">Scopri</a></article>
-          <article class="feature-card reveal"><span class="feature-icon" aria-hidden="true">04</span><h3>Progressi</h3><p>Peso, misure e storico delle rilevazioni per leggere l'andamento con continuità.</p><a class="text-link" href="funzionalita.html#progressi">Scopri</a></article>
-          <article class="feature-card reveal"><span class="feature-icon" aria-hidden="true">05</span><h3>Questionari</h3><p>Questionario iniziale e check-in periodici organizzati in sezioni e risposte strutturate.</p><a class="text-link" href="funzionalita.html#questionari">Scopri</a></article>
-          <article class="feature-card reveal"><span class="feature-icon" aria-hidden="true">06</span><h3>Agenda e appuntamenti</h3><p>Attività personali e calendario giorno, settimana e mese per coordinare il lavoro.</p><a class="text-link" href="funzionalita.html#organizzazione">Scopri</a></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section trainer-overview" id="ios-trainer" aria-labelledby="trainer-overview-title">
-      <div class="container trainer-overview__layout">
-        <div class="trainer-overview__copy reveal">
-          <h2 id="trainer-overview-title">GymManager Trainer,<br>dall’interno.</h2>
-          <p>Il tuo lavoro, anche quando non sei al Desktop. Una registrazione reale dell’app <strong>iOS Trainer</strong>: calendario, clienti, schede e agenda, nel contesto del professionista.</p>
-          <ul class="trainer-overview__features">
-            <li><strong>Organizza la giornata.</strong> Consulta appuntamenti, attività e scadenze.</li>
-            <li><strong>Ritrova il percorso.</strong> Apri un cliente e consulta allenamento e nutrizione.</li>
-            <li><strong>Porta con te il contesto.</strong> Le applicazioni Trainer e Client rimangono distinte.</li>
+        <header class="app-showcase__intro">
+          <h2 id="trainer-overview-title">GymManager Trainer.<br>Il tuo lavoro, sempre con te.</h2>
+          <p>Il telefono diventa l’estensione del tuo gestionale. Controlla clienti, appuntamenti, schede e agenda anche fuori studio: meno interruzioni, più contesto, senza dover essere davanti al Desktop.</p>
+          <ul class="app-showcase__benefits" aria-label="Vantaggi dell’app Trainer">
+            <li>Clienti a portata di mano</li><li>Impegni sotto controllo</li><li>Continuità con il Desktop</li>
           </ul>
-          <p class="trainer-overview__note" id="trainer-overview-description">Circa 90 secondi · senza audio · profili sintetici DEMO. Avvia quando vuoi; usa i controlli per mettere in pausa, spostarti nel video o aprirlo a schermo intero, dove supportato. La disponibilità dell’app dipende dai canali abilitati.</p>
-          <div class="trainer-overview__actions">
-            <button class="button button--secondary" type="button" data-video-restart aria-controls="ios-trainer-video">Guarda dall’inizio</button>
-            <a class="text-link" href="#ecosistema">Scopri le tre applicazioni</a>
+          <p class="app-showcase__hint">Scorri per esplorare l’app, oppure scegli una schermata. Immagini reali, solo dati DEMO.</p>
+        </header>
+        <div class="app-showcase__layout">
+          <aside class="app-showcase__stage" aria-label="Panoramica per schermate">
+            <figure class="app-showcase__figure">
+              <button class="showcase-phone" type="button" data-showcase-phone aria-label="Ingrandisci la schermata attiva" aria-haspopup="dialog">
+                <img data-showcase-screen="home" class="is-active" src="assets/screenshots/ios-trainer-home.webp" alt="Home reale iOS Trainer con attività e scadenze sintetiche del Trainer Demo" width="400" height="816" loading="lazy" decoding="async">
+                <img data-showcase-screen="calendar" aria-hidden="true" src="assets/screenshots/ios-trainer-calendar.webp" alt="Calendario settimanale reale iOS Trainer con allenamenti del cliente Giulio Bianchi DEMO" width="400" height="816" loading="lazy" decoding="async">
+                <img data-showcase-screen="clients" aria-hidden="true" src="assets/screenshots/ios-trainer-clients.webp" alt="Elenco clienti reale iOS Trainer con quattro profili sintetici contrassegnati DEMO" width="400" height="816" loading="lazy" decoding="async">
+                <img data-showcase-screen="workout" aria-hidden="true" src="assets/screenshots/ios-trainer-workout.webp" alt="Scheda allenamento reale del cliente DEMO con settimana, sessione, serie, ripetizioni e recupero" width="400" height="816" loading="lazy" decoding="async">
+                <img data-showcase-screen="agenda" aria-hidden="true" src="assets/screenshots/ios-trainer-agenda.webp" alt="Agenda reale iOS Trainer con attività di verifica e promemoria dei soli clienti DEMO" width="400" height="816" loading="lazy" decoding="async">
+              </button>
+              <figcaption><span data-showcase-caption>Home · schermata reale iOS Trainer</span><span class="app-showcase__zoom-hint">Tocca lo schermo per ingrandire</span></figcaption>
+            </figure>
+            <nav class="app-showcase__nav" aria-label="Scegli una schermata Trainer">
+              <a href="#trainer-home" data-showcase-link="home" aria-current="step">Home</a>
+              <a href="#trainer-calendar" data-showcase-link="calendar">Calendario</a>
+              <a href="#trainer-clients" data-showcase-link="clients">Clienti</a>
+              <a href="#trainer-workout" data-showcase-link="workout">Scheda</a>
+              <a href="#trainer-agenda" data-showcase-link="agenda">Agenda</a>
+            </nav>
+            <p class="app-showcase__media-error" role="status" hidden>Immagine non disponibile. Puoi continuare a leggere la panoramica qui accanto.</p>
+          </aside>
+          <div class="app-showcase__steps">
+            <article class="app-showcase__step" id="trainer-home" data-showcase-step="home" data-showcase-label="Home">
+              <div class="app-showcase__step-copy">
+                <span class="app-showcase__index" aria-hidden="true">1 / 5</span>
+                <h3>La giornata, a colpo d’occhio.</h3>
+                <p>Prima di entrare in studio, ritrova appuntamenti, attività e scadenze. Apri la Home e individua le prossime cose da seguire, anche quando non hai il Desktop davanti.</p>
+                <p class="app-showcase__feature">Una visione rapida delle priorità, non un altro elenco da ricostruire.</p>
+              </div>
+              <img class="app-showcase__inline" src="assets/screenshots/ios-trainer-home.webp" alt="Home reale iOS Trainer con attività e scadenze sintetiche del Trainer Demo" width="400" height="816" loading="lazy" decoding="async">
+            </article>
+            <article class="app-showcase__step" id="trainer-calendar" data-showcase-step="calendar" data-showcase-label="Calendario">
+              <div class="app-showcase__step-copy">
+                <span class="app-showcase__index" aria-hidden="true">2 / 5</span>
+                <h3>Il prossimo appuntamento è già qui.</h3>
+                <p>Passa dal giorno alla settimana o al mese per consultare gli impegni. Orario, cliente e sessione restano insieme: il contesto che ti serve tra un appuntamento e l’altro.</p>
+                <p class="app-showcase__feature">Controlla la tua organizzazione anche lontano dalla postazione.</p>
+              </div>
+              <img class="app-showcase__inline" src="assets/screenshots/ios-trainer-calendar.webp" alt="Calendario settimanale reale iOS Trainer con allenamenti del cliente Giulio Bianchi DEMO" width="400" height="816" loading="lazy" decoding="async">
+            </article>
+            <article class="app-showcase__step" id="trainer-clients" data-showcase-step="clients" data-showcase-label="Clienti">
+              <div class="app-showcase__step-copy">
+                <span class="app-showcase__index" aria-hidden="true">3 / 5</span>
+                <h3>Ogni cliente, con il suo contesto.</h3>
+                <p>Cerca una persona e apri il suo profilo. L’elenco clienti è il punto di partenza per ritrovare il percorso che stai seguendo, senza dover tornare al computer.</p>
+                <p class="app-showcase__feature">Dalla ricerca alla scheda della persona, direttamente dal telefono.</p>
+              </div>
+              <img class="app-showcase__inline" src="assets/screenshots/ios-trainer-clients.webp" alt="Elenco clienti reale iOS Trainer con quattro profili sintetici contrassegnati DEMO" width="400" height="816" loading="lazy" decoding="async">
+            </article>
+            <article class="app-showcase__step" id="trainer-workout" data-showcase-step="workout" data-showcase-label="Scheda">
+              <div class="app-showcase__step-copy">
+                <span class="app-showcase__index" aria-hidden="true">4 / 5</span>
+                <h3>La scheda, proprio quando ti serve.</h3>
+                <p>Consulta il programma attivo, la settimana e le indicazioni degli esercizi. Durante il lavoro con un cliente hai sotto mano serie, ripetizioni, recuperi e note operative.</p>
+                <p class="app-showcase__feature">Il telefono affianca il Desktop: il lavoro continua, il contesto rimane.</p>
+              </div>
+              <img class="app-showcase__inline" src="assets/screenshots/ios-trainer-workout.webp" alt="Scheda allenamento reale del cliente DEMO con settimana, sessione, serie, ripetizioni e recupero" width="400" height="816" loading="lazy" decoding="async">
+            </article>
+            <article class="app-showcase__step" id="trainer-agenda" data-showcase-step="agenda" data-showcase-label="Agenda">
+              <div class="app-showcase__step-copy">
+                <span class="app-showcase__index" aria-hidden="true">5 / 5</span>
+                <h3>Non perdere il filo tra una sessione e l’altra.</h3>
+                <p>Ritrova le attività personali, le priorità e le verifiche dedicate ai clienti. L’agenda ti aiuta a tenere visibile ciò che viene dopo, anche quando la giornata si sposta fuori dallo studio.</p>
+                <p class="app-showcase__feature">Clienti, programmi e impegni: una continuità concreta con il gestionale.</p>
+              </div>
+              <img class="app-showcase__inline" src="assets/screenshots/ios-trainer-agenda.webp" alt="Agenda reale iOS Trainer con attività di verifica e promemoria dei soli clienti DEMO" width="400" height="816" loading="lazy" decoding="async">
+            </article>
           </div>
-          <details class="trainer-overview__description">
-            <summary>La panoramica, anche senza video</summary>
-            <p>La Home raccoglie attività e scadenze del Trainer Demo. Il calendario passa dalla settimana al mese; aprendo Giulio Bianchi DEMO si consultano la scheda allenamento, il riepilogo del percorso e il piano nutrizionale. La registrazione mostra poi l’elenco clienti, la creazione di un’attività in agenda e il profilo del Trainer. Nessuna immagine di un cliente reale viene utilizzata.</p>
-          </details>
         </div>
-        <figure class="trainer-overview__media reveal">
-          <div class="trainer-phone">
-            <video id="ios-trainer-video" controls playsinline muted preload="none" width="384" height="832" poster="assets/screenshots/ios-trainer-poster.webp" aria-label="Panoramica reale dell’app iOS GymManager Trainer" aria-describedby="trainer-overview-description" data-pause-offscreen>
-              <source src="assets/videos/ios-trainer-overview-web.mp4" type="video/mp4">
-              Il browser non supporta il video. <a href="assets/videos/ios-trainer-overview-web.mp4">Apri la panoramica iOS Trainer</a>.
-            </video>
-          </div>
-          <figcaption>iOS Trainer · registrazione originale del prodotto.<br>Non è l’app iOS Client e non è un mockup.</figcaption>
-        </figure>
+        <p class="app-showcase__availability">È la companion iOS del Trainer. La disponibilità dipende dai canali abilitati. <a class="text-link" href="#ecosistema">Conosci l’ecosistema</a></p>
+        <p><a class="button button--secondary" href="app-trainer/">Approfondisci l’app Trainer</a></p>
       </div>
     </section>
 
-    <section class="section section--dark" id="come-funziona">
-      <div class="container">
-        <div class="section-heading reveal">
-          <span class="eyebrow">Il workflow</span>
-          <h2>Dal primo contatto alla revisione del programma.</h2>
-          <p>Ogni fase conserva il proprio contesto, così sai sempre cosa è stato raccolto, assegnato e aggiornato.</p>
-        </div>
-        <div class="workflow">
-          <article class="reveal"><h3>Crea il cliente</h3><p>Raccogli i dati essenziali e definisci il punto di partenza.</p></article>
-          <article class="reveal"><h3>Configura il questionario</h3><p>Organizza le informazioni iniziali e i check-in periodici.</p></article>
-          <article class="reveal"><h3>Crea o riusa un modello</h3><p>Parti da una struttura e adattala alla persona.</p></article>
-          <article class="reveal"><h3>Assegna il programma</h3><p>Attiva allenamento e piano alimentare per il periodo previsto.</p></article>
-          <article class="reveal"><h3>Monitora e aggiorna</h3><p>Segui progressi, appuntamenti, feedback e scadenze.</p></article>
-        </div>
-      </div>
-    </section>
+    <!-- CLIENT_PREVIEW -->
 
-    <section class="section" id="ecosistema">
-      <div class="container">
-        <div class="section-heading reveal">
-          <span class="eyebrow">Un ecosistema, ruoli distinti</span>
-          <h2>Tre applicazioni progettate intorno allo stesso percorso.</h2>
-          <p>Il Desktop resta il centro operativo. Le esperienze iOS sono separate per rispettare il contesto del Trainer e quello del Cliente, senza replicare inutilmente ogni funzione.</p>
-        </div>
-        <div class="ecosystem-grid">
-          <article class="ecosystem-card ecosystem-card--primary reveal"><span class="status">Desktop Windows</span><h3>Desktop Trainer</h3><p>Il gestionale completo per Windows: pianificazione, clienti, documenti, nutrizione, agenda, calendario e amministrazione quotidiana.</p><small>Centro operativo dell'ecosistema</small></article>
-          <article class="ecosystem-card reveal"><span class="status">Progetto nativo esistente</span><h3>iOS Trainer</h3><p>Companion mobile dedicata al professionista, mantenuta come applicazione distinta dal gestionale Desktop.</p><small>Distribuzione e disponibilità dipendono dai canali abilitati</small></article>
-          <article class="ecosystem-card reveal"><span class="status">In validazione</span><h3>iOS Client</h3><p>Esperienza nativa separata per la consultazione del percorso cliente. Non è ancora presentata come rilascio pubblico.</p><small>Nessuna data di pubblicazione promessa</small></article>
-        </div>
-      </div>
-    </section>
+    <div id="come-funziona" class="container workflow-intro"><h2>Dal primo contatto alla revisione.</h2><ol><li>Crea il cliente</li><li>Raccogli il questionario</li><li>Prepara il programma</li><li>Assegna la copia personale</li><li>Monitora e aggiorna</li></ol></div>
+    <!-- ECOSYSTEM_STORY -->
 
-    <section class="section section--compact">
-      <div class="container">
-        <div class="section-heading reveal"><span class="eyebrow">Dentro il prodotto</span><h2>Interfacce reali, dati demo.</h2><p>Esplora le schermate del gestionale. Puoi ingrandire ogni immagine per leggerne i dettagli: nomi, programmi e valori appartengono a profili sintetici.</p></div>
-        <div class="gallery-grid">
-          <figure class="gallery-card reveal"><img class="screenshot-image" data-screenshot loading="lazy" width="1600" height="828" src="assets/screenshots/10-progress.webp" alt="Grafici reali di peso e composizione corporea del profilo sintetico Giulio Bianchi DEMO"><figcaption>Progressi e andamento nel tempo · dati demo</figcaption></figure>
-          <figure class="gallery-card reveal"><img class="screenshot-image" data-screenshot loading="lazy" width="1600" height="820" src="assets/screenshots/08-nutrition-client-plan.webp" alt="Pasti, quantità e macronutrienti del piano alimentare sintetico Giulio DEMO"><figcaption>Il piano alimentare, giornata per giornata</figcaption></figure>
-          <figure class="gallery-card reveal"><img class="screenshot-image" data-screenshot loading="lazy" width="1565" height="918" src="assets/screenshots/09-calendar.webp" alt="Calendario mensile reale di GymManager con appuntamenti del cliente demo Marco"><figcaption>Appuntamenti e calendario · dati demo</figcaption></figure>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section--compact">
+<section class="section section--compact" id="inizia">
       <div class="container">
         <div class="cta-panel reveal">
           <div><span class="eyebrow">Desktop Windows</span><h2>Pronto a installare GymManager?</h2><p>Il download seleziona automaticamente l'installer della release stabile più recente.</p></div>
-          <a class="button button--primary" href="download.html">Scarica ultima versione</a>
+          <a class="button button--primary" href="download/">Scarica GymManager</a>
         </div>
       </div>
     </section>
+
+
+
   </main>
 
-  <footer class="site-footer">
-    <div class="footer-grid container">
-      <div class="footer-brand"><a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">GM</span><span>GYMMANAGER</span></a><p>Gestionale Desktop e ecosistema applicativo per Personal Trainer.</p></div>
-      <nav class="footer-links" aria-label="Navigazione footer"><a href="index.html">Home</a><a href="funzionalita.html">Funzionalità</a><a href="download.html">Download</a><a href="privacy/">Privacy (bozza)</a><a href="support/">Supporto (bozza)</a></nav>
-    </div>
-    <div class="footer-bottom container"><span>© <span data-year></span> GymManager</span><span>Software gestionale per professionisti del fitness.</span></div>
-  </footer>
+  <!-- Shared footer is rendered by scripts/site-layout.mjs. -->
 </body>
 </html>

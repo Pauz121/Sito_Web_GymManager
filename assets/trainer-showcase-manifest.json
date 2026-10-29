@@ -1,0 +1,16 @@
+{
+  "source": "assets/videos/ios-trainer-overview-web.mp4",
+  "sourceStatus": "Pre-existing user-modified recording, preserved byte-for-byte; not shipped in public output",
+  "sourceBytes": 13004770,
+  "sourceSha256": "c82a059b28cb2feace44b5ed0cd7416255c08d3f1e83ad84fcf866d7b6253896",
+  "dimensions": [400, 816],
+  "privacyReview": "All five frames visually reviewed: Trainer Demo and explicitly synthetic DEMO clients only; no real client records, health data or private contacts. App UI is authentic, not generated. Native translucent tab bars retained; no additional overlays/cropping.",
+  "logoSource": "Existing Trainer GymManagerLogo asset, not the unrelated Fit Manager Client logo; real black/red mark on white, resized only",
+  "screens": [
+    {"id":"home","timestamp":1,"path":"assets/screenshots/ios-trainer-home.webp","sha256":"30255856155ac4fce31593d7680e5ff1ed62db63810fee18ad43f12a3481d543"},
+    {"id":"calendar","timestamp":36,"path":"assets/screenshots/ios-trainer-calendar.webp","sha256":"3b81ac4f7c0b89839481c398a07caf83c68ca3f92f0289feee1a1e4420e0b149"},
+    {"id":"clients","timestamp":44,"path":"assets/screenshots/ios-trainer-clients.webp","sha256":"e94a9c1cd4f5ba84b2a179a93d86c715d949a8fd10fa131f2a5d60c8ffaba1f1"},
+    {"id":"workout","timestamp":52,"path":"assets/screenshots/ios-trainer-workout.webp","sha256":"fd62e54d6ddc856aa383e97e8d50dd21f17dadc51dc246a02bf565bce70980c4"},
+    {"id":"agenda","timestamp":75,"path":"assets/screenshots/ios-trainer-agenda.webp","sha256":"ffc7bf17d23fcd62b682bb69f5dc4751ab232eb9445596b63755222a0d98ae6b"}
+  ]
+}

@@ -6,9 +6,10 @@ import { fileURLToPath } from 'node:url';
 import { pages as publicPages, isPublicAsset } from './public-files.mjs';
 
 const site = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const root = process.argv.includes('--public') ? join(site, 'dist') : site;
+// All routes are built together. Never serve raw source fragments as independent pages.
+const root = join(site, 'dist');
 const port = Number(process.env.GYMMANAGER_SITE_PORT || 8765);
-const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.mp4': 'video/mp4', '.vtt': 'text/vtt; charset=utf-8' };
+const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.png': 'image/png', '.webp': 'image/webp', '.mp4': 'video/mp4', '.vtt': 'text/vtt; charset=utf-8' };
 const pages = new Set(publicPages);
 const inside = (path) => { const rel = relative(root, path); return rel !== '..' && !rel.startsWith('..\\') && !rel.startsWith('../') && !isAbsolute(rel); };
 
@@ -19,7 +20,7 @@ createServer(async (request, response) => {
       return;
     }
     const pathname = decodeURIComponent(new URL(request.url || '/', 'http://127.0.0.1').pathname);
-    if (pathname === '/privacy' || pathname === '/support') {
+    if (publicPages.includes(pathname.slice(1) + '/index.html')) {
       response.writeHead(308, { Location: pathname + '/', 'Cache-Control': 'no-store' }).end();
       return;
     }

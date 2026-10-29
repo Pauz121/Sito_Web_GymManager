@@ -13,11 +13,47 @@ services:
         value: "true"
     routes:
       - type: redirect
+        source: /desktop
+        destination: /desktop/
+      - type: redirect
+        source: /app-trainer
+        destination: /app-trainer/
+      - type: redirect
+        source: /app-client
+        destination: /app-client/
+      - type: redirect
+        source: /download
+        destination: /download/
+      - type: redirect
         source: /privacy
         destination: /privacy/
       - type: redirect
         source: /support
         destination: /support/
+      - type: redirect
+        source: /desktop/dashboard
+        destination: /desktop/dashboard/
+      - type: redirect
+        source: /desktop/clienti
+        destination: /desktop/clienti/
+      - type: redirect
+        source: /desktop/allenamenti
+        destination: /desktop/allenamenti/
+      - type: redirect
+        source: /desktop/agenda
+        destination: /desktop/agenda/
+      - type: redirect
+        source: /desktop/schede-allenamento
+        destination: /desktop/schede-allenamento/
+      - type: redirect
+        source: /desktop/alimentazione
+        destination: /desktop/alimentazione/
+      - type: redirect
+        source: /desktop/progressi
+        destination: /desktop/progressi/
+      - type: redirect
+        source: /desktop/pagamenti
+        destination: /desktop/pagamenti/
     headers:
       - path: /*
         name: X-Content-Type-Options
