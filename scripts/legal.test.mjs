@@ -31,7 +31,7 @@ test('no legal paragraphs, lists or definitions lost from source documents', asy
 });
 test('privacy retains ecosystem disclosure, HealthKit/location and undefined retention', () => {
   const html = section('privacy');
-  for (const term of ['Supabase Auth','Supabase PostgreSQL','Supabase Storage','Supabase Edge Functions','Stripe','HealthKit','posizione','Periodi e criteri di conservazione non ancora definiti','Basi giuridiche','ancora in lavorazione']) assert.ok(html.includes(term),term);
+  for (const term of ['Supabase Auth','Supabase PostgreSQL','Supabase Storage','Supabase Edge Functions','Stripe','HealthKit','posizione','Periodi e criteri di conservazione non ancora definiti','Basi giuridiche','Profilo → Elimina account']) assert.ok(html.includes(term),term);
   assert.doesNotMatch(html,/\b(?:30|60|90|365) giorni|\b(?:2|5|10) anni/);
 });
 test('support security notices, account/deletion and original local IDs survive', () => {
@@ -78,4 +78,13 @@ test('legal text retains existing readable layout without scripts', async () => 
   const css=await readFile(join(root,'assets/css/legal.css'),'utf8');
   assert.match(css,/min-height: 44px/);
   assert.doesNotMatch(css,/opacity: 0\b|display: none|overflow: hidden/);
+});
+
+test('deletion disclosures preserve autonomous Clients and truthful completion state', () => {
+  const privacy = section('privacy'), support = section('support');
+  for (const term of ['Client autonomi', 'risorse condivise', 'registro amministrativo', 'asincrona', 'Supabase Storage', 'email di conferma non']) assert.ok(privacy.includes(term), term);
+  for (const html of [privacy, support]) {
+    assert.ok(html.includes('verifica su dispositivo'));
+    assert.doesNotMatch(html, /eliminazione garantita|cancellazione istantanea garantita/);
+  }
 });
